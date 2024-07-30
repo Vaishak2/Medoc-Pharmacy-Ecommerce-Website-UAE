@@ -1,0 +1,15 @@
+.slick-slide {
+    display: flex;
+    justify-items: center;
+    /* width: fit-content !important; */
+    /* margin-right: 24px; */
+}
+
+.recentlyviewedCard {
+    height: 421px ;
+    width: 282px !important;
+}
+
+.custom-carousel .slick-list {
+    margin: 0 -12px; 
+  }

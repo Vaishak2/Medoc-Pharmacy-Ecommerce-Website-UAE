@@ -1,0 +1,32 @@
+.tabButton {
+    width: 189px;
+    height: 48px;
+    font-weight: 400;
+    font-size: 14px;
+    border-width: 1px;
+    background-color: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.active-tabButton {
+    background-color: inherit;
+    font-weight: 600;
+}
+
+.tabButton:hover {
+    background-color: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tabContent {
+    font-size: 14px;
+    text-align: left;
+    display: none;
+}
+
+.active-tabContent {
+    display: block;
+}

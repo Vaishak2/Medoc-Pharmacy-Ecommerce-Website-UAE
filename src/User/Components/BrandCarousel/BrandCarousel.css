@@ -1,0 +1,11 @@
+.slick-slide {
+    display: flex;
+    justify-items: center;
+    /* width: fit-content !important; */
+    /* margin-right: 24px; */
+}
+
+.brandCard {
+    height: 180px ;
+    width: 180px !important;
+}

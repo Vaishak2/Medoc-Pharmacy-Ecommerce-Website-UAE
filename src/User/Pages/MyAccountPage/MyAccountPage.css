@@ -1,0 +1,20 @@
+.accountButton {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   padding-left: 24px;
+   cursor: pointer;
+}
+
+.active-accountButton {
+    background-color: #EEF2FF;
+}
+
+.accountContent {
+    display: none;
+}
+
+.active-accountContent {
+    display: block;
+}
+

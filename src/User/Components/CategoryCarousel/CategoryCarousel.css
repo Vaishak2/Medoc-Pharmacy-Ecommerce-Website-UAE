@@ -1,0 +1,27 @@
+.slick-slide {
+    display: flex;
+    justify-items: center;
+    /* width: fit-content !important; */
+    /* margin-right: 24px; */
+}
+
+.categoryCard {
+    height: 231px ;
+    width: 180px !important;
+}
+
+
+
+
+.custom-carousel .slick-list {
+  margin: 0 -12px; 
+}
+
+
+.custom-carousel .custom-next-arrow {
+  right: -40px; /* Adjust this value to move the right arrow further right */
+}
+
+.custom-carousel .custom-prev-arrow {
+  left: -40px; /* Adjust this value to move the left arrow further left */
+}
