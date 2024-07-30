@@ -12,7 +12,7 @@ function RouteFile() {
     return (
         <div>
             <Routes>
-                <Route path='/user' element={<UserLayout/>}>
+                <Route path='/' element={<UserLayout/>}>
 
                     <Route index element={<HomePage/>}/>
                     <Route path='home' element={<HomePage/>}/>
