@@ -5,10 +5,10 @@ import Delete from '../../../Assets/Icons/delete_icon (1).svg';
 import BuyThisNow from '../../../Assets/Icons/shopping_basket (1).svg';
 import Coupons from "../../../Assets/Icons/coupons.svg";
 import Continue from "../../../Assets/Icons/continue.svg";
-import Cart_Choose from "../../Components/Cart_Choose/Cart_Choose"
+import Cart_Choose from "../../Components/Cart_Choose/Cart_Choose";
+import RemoveConformation from "../../Components/RemoveConformation/RemoveConformation"; // Import the RemoveConformation component
 
 function CartItem() {
-
   const [isCartChooseOpen, setIsCartChooseOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [items, setItems] = useState([
@@ -47,9 +47,18 @@ function CartItem() {
     },
   ]);
 
+  const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
+  const [itemToRemove, setItemToRemove] = useState(null);
+
   const handleQuantityChange = (id, newQuantity) => {
     setItems(items.map(item => 
       item.id === id ? { ...item, quantity: newQuantity } : item
+    ));
+  };
+
+  const handleSizeChange = (id, newSize) => {
+    setItems(items.map(item => 
+      item.id === id ? { ...item, size: newSize } : item
     ));
   };
 
@@ -71,6 +80,21 @@ function CartItem() {
     setSelectedItem(null);
   };
 
+  const handleOpenRemoveModal = (item) => {
+    setItemToRemove(item);
+    setIsRemoveModalOpen(true);
+  };
+
+  const handleCloseRemoveModal = () => {
+    setIsRemoveModalOpen(false);
+    setItemToRemove(null);
+  };
+
+  const handleRemoveItem = () => {
+    setItems(items.filter(item => item.id !== itemToRemove.id));
+    handleCloseRemoveModal();
+  };
+
   const calculateDeliveryCharges = () => {
     return 20; // Assuming a flat rate for delivery charges
   };
@@ -84,7 +108,7 @@ function CartItem() {
   };
 
   return (
-    <div className= {`cart-section flex ml-[120px] $ {isCartChooseOpen ? 'blur-background' : ''}`}>
+    <div className={`cart-section flex ml-[120px] ${isCartChooseOpen || isRemoveModalOpen ? 'blur-background' : ''}`}>
       <div className="cart-first-section sm:mt-16">
         <h1 className="sm:text-[18px] sm:leading-6 font-semibold text-start">
           Cart <span className="font-normal">({items.length} items)</span>
@@ -132,11 +156,11 @@ function CartItem() {
               </div>
             </div>
             <div className={`border-t border-b border-x rounded-b-lg sm:w-[792px] py-4 px-[65px] grid grid-cols-3 gap-8 ${item.outOfStock ? 'opacity-25' : ''}`}>
-              <div className="flex items-center text-[14px] leading-4 font-normal mx- cursor-pointer">
+              <div className="flex items-center text-[14px] leading-4 font-normal mx-auto cursor-pointer">
                 <img className="sm:w-4 sm:h-4 mr-2" src={Wishlist} alt="Move to wishlist" />
                 Move to wishlist
               </div>
-              <div className="flex items-center text-[14px] leading-4 font-normal mx-auto cursor-pointer">
+              <div className="flex items-center text-[14px] leading-4 font-normal mx-auto cursor-pointer" onClick={() => handleOpenRemoveModal(item)}>
                 <img className="sm:w-4 sm:h-4 mr-2" src={Delete} alt="Remove" />
                 Remove
               </div>
@@ -196,18 +220,24 @@ function CartItem() {
           <img src={Continue} alt="Continue" />
         </div>
       </div>
-
-      
       {isCartChooseOpen && selectedItem && (
-  <div className="fixed inset-0 flex items-center justify-center bg-[#353533CC] backdrop-blur-sm   bg-opacity-95">
-    <Cart_Choose 
-      item={selectedItem} 
-      onClose={handleCloseCartChoose}  
-      onQuantityChange={handleQuantityChange}
-    />
-  </div>
-)}
-
+        <div className="fixed inset-0 flex items-center justify-center bg-[#353533CC] backdrop-blur-sm bg-opacity-95">
+          <Cart_Choose 
+            item={selectedItem} 
+            onClose={handleCloseCartChoose}  
+            onQuantityChange={handleQuantityChange}
+            onSizeChange={handleSizeChange}
+          />
+        </div>
+      )}
+      {isRemoveModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-[#353533CC] backdrop-blur-sm bg-opacity-95">
+          <RemoveConformation 
+            onRemove={handleRemoveItem}
+            onCancel={handleCloseRemoveModal}
+          />
+        </div>
+      )}
     </div>
   );
 }
