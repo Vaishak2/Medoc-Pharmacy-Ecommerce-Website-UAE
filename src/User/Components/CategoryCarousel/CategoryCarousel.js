@@ -4,6 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LeftScrollArrow from '../../../Assets/Icons/Left scroll arrow.png'
 import RightScrollArrow from '../../../Assets/Icons/Right scroll arrow.png'
+import CategoryImage1 from '../../../Assets/CategoryImage/Rectangle 203.png'
+import CategoryImage2 from '../../../Assets/CategoryImage/Rectangle 203 (1).png'
+import CategoryImage3 from '../../../Assets/CategoryImage/Rectangle 203 (2).png'
+import CategoryImage4 from '../../../Assets/CategoryImage/Rectangle 203 (3).png'
+import CategoryImage5 from '../../../Assets/CategoryImage/Rectangle 203 (4).png'
+import CategoryImage6 from '../../../Assets/CategoryImage/Rectangle 203 (5).png'
 import './CategoryCarousel.css'
 
 
@@ -58,62 +64,62 @@ function CategoryCarousel() {
     const products = [
         {
             "product_id": 1,
-            "product_name": "Wireless Mouse",
-            "image_url": "https://via.placeholder.com/200?text=Wireless+Mouse",
+            "product_name": "Dermo Cosmetics",
+            "image_url": CategoryImage1,
             "description": "A sleek and ergonomic wireless mouse with high precision and long battery life."
         },
         {
             "product_id": 2,
-            "product_name": "Bluetooth Headphones",
-            "image_url": "https://via.placeholder.com/200?text=Bluetooth+Headphones",
+            "product_name": "Nutrition & Supplements",
+            "image_url": CategoryImage2,
             "description": "Noise-cancelling Bluetooth headphones with superior sound quality and comfortable fit."
         },
         {
             "product_id": 3,
-            "product_name": "Smart Watch",
-            "image_url": "https://via.placeholder.com/200?text=Smart+Watch",
+            "product_name": "Mother & Baby Care",
+            "image_url": CategoryImage3,
             "description": "A versatile smart watch with fitness tracking, heart rate monitoring, and customizable watch faces."
         },
         {
             "product_id": 4,
-            "product_name": "Portable Speaker",
-            "image_url": "https://via.placeholder.com/200?text=Portable+Speaker",
+            "product_name": "Personal Care",
+            "image_url": CategoryImage4,
             "description": "A compact portable speaker with powerful sound and long-lasting battery for outdoor use."
         },
         {
             "product_id": 5,
-            "product_name": "External Hard Drive",
-            "image_url": "https://via.placeholder.com/200?text=External+Hard+Drive",
+            "product_name": "Medicines",
+            "image_url": CategoryImage5,
             "description": "A high-capacity external hard drive with fast data transfer speeds and durable design."
         },
         {
             "product_id": 6,
-            "product_name": "Wireless Mouse",
-            "image_url": "https://via.placeholder.com/200?text=Wireless+Mouse",
+            "product_name": "Home Health Care",
+            "image_url": CategoryImage6,
             "description": "A sleek and ergonomic wireless mouse with high precision and long battery life."
         },
         {
             "product_id": 7,
-            "product_name": "Bluetooth Headphones",
-            "image_url": "https://via.placeholder.com/200?text=Bluetooth+Headphones",
+            "product_name": "Nutrisious",
+            "image_url": CategoryImage1,
             "description": "Noise-cancelling Bluetooth headphones with superior sound quality and comfortable fit."
         },
         {
             "product_id": 8,
-            "product_name": "Smart Watch",
-            "image_url": "https://via.placeholder.com/200?text=Smart+Watch",
+            "product_name": "Beauty Products",
+            "image_url": CategoryImage2,
             "description": "A versatile smart watch with fitness tracking, heart rate monitoring, and customizable watch faces."
         },
         {
             "product_id": 9,
-            "product_name": "Portable Speaker",
-            "image_url": "https://via.placeholder.com/200?text=Portable+Speaker",
+            "product_name": "Pocket products",
+            "image_url": CategoryImage3,
             "description": "A compact portable speaker with powerful sound and long-lasting battery for outdoor use."
         },
         {
             "product_id": 10,
-            "product_name": "External Hard Drive",
-            "image_url": "https://via.placeholder.com/200?text=External+Hard+Drive",
+            "product_name": "Medical equipments",
+            "image_url": CategoryImage4,
             "description": "A high-capacity external hard drive with fast data transfer speeds and durable design."
         }
     ];
@@ -127,7 +133,7 @@ function CategoryCarousel() {
 
                 <Slider {...settings}>
                     {products.map((product) => (
-                        <div className='categoryCard text-black rounded-lg border' key={product.id}>
+                        <div className='categoryCard text-black rounded-lg border cursor-pointer' key={product.id}>
                             <div className=' flex justify-center items-center'>
                                 <img src={product.image_url} className='h-[151px] w-[164px] mt-[8px] rounded-lg' alt={product.product_name} />
                             </div>
