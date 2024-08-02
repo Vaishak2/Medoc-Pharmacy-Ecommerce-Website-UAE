@@ -7,6 +7,7 @@ import Coupons from "../../../Assets/Icons/coupons.svg";
 import Continue from "../../../Assets/Icons/continue.svg";
 import Cart_Choose from "../../Components/Cart_Choose/Cart_Choose";
 import RemoveConformation from "../../Components/RemoveConformation/RemoveConformation"; // Import the RemoveConformation component
+import MoveToWishlist from '../MoveToWishlist/MoveToWishlist';
 
 function CartItem() {
   const [isCartChooseOpen, setIsCartChooseOpen] = useState(false);
@@ -49,6 +50,10 @@ function CartItem() {
 
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
   const [itemToRemove, setItemToRemove] = useState(null);
+
+  const [isMoveToWishlistModalOpen, setIsMoveToWishlistModalOpen] = useState(false);
+  const [itemToMoveToWishlist, setItemToMoveToWishlist] = useState(null);
+
 
   const handleQuantityChange = (id, newQuantity) => {
     setItems(items.map(item => 
@@ -93,6 +98,20 @@ function CartItem() {
   const handleRemoveItem = () => {
     setItems(items.filter(item => item.id !== itemToRemove.id));
     handleCloseRemoveModal();
+  };
+  const handleMoveToWishlistOpenModal = (item) => {
+    setItemToMoveToWishlist(item);
+    setIsMoveToWishlistModalOpen(true);
+  };
+
+  const handleCloseMoveToWishlistModal = () => {
+    setIsMoveToWishlistModalOpen(false);
+    setItemToMoveToWishlist(null);
+  };
+
+  const handleMoveToWishlistItem = () => {
+    setItems(items.filter(item => item.id !== itemToMoveToWishlist.id));
+    handleCloseMoveToWishlistModal();
   };
 
   const calculateDeliveryCharges = () => {
@@ -156,7 +175,7 @@ function CartItem() {
               </div>
             </div>
             <div className={`border-t border-b border-x rounded-b-lg sm:w-[792px] py-4 px-[65px] grid grid-cols-3 gap-8 ${item.outOfStock ? 'opacity-25' : ''}`}>
-              <div className="flex items-center text-[14px] leading-4 font-normal mx-auto cursor-pointer">
+              <div className="flex items-center text-[14px] leading-4 font-normal mx-auto cursor-pointer" onClick={() => handleMoveToWishlistOpenModal(item)}>
                 <img className="sm:w-4 sm:h-4 mr-2" src={Wishlist} alt="Move to wishlist" />
                 Move to wishlist
               </div>
@@ -236,6 +255,16 @@ function CartItem() {
             onRemove={handleRemoveItem}
             onCancel={handleCloseRemoveModal}
           />
+        </div>
+      )}
+
+      {isMoveToWishlistModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-[#353533CC] backdrop-blur-sm bg-opacity-95">
+        <MoveToWishlist
+          item={itemToMoveToWishlist}
+          onClose={handleCloseMoveToWishlistModal}
+          onConfirm={handleMoveToWishlistItem}
+        />
         </div>
       )}
     </div>
