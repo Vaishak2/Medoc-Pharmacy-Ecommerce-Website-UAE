@@ -11,8 +11,8 @@ function MoveToWishlist({ item, onClose, onConfirm }) {
           <h2 className='sm:mt-2 text-[#818180] sm:text-[14px] sm:leading-6'>Are you sure you want to move this item from cart</h2>
         </div>
         <div className='sm:mt-8 flex sm:text-[16px] sm:leading-6 sm:font-medium'>
-          <button className='border rounded-lg px-[54px] py-4' onClick={onCancel}>Cancel</button>
-          <button className='border border-[#FC5050] text-white rounded-lg px-4 bg-[#FC5050] py-4 sm:ml-4' onClick={onMoveToWishlist}>Move To Wishlist</button>
+          <button className='border rounded-lg px-[54px] py-4' onClick={onClose}>Cancel</button>
+          <button className='border border-[#FC5050] sm:text-[15px] sm:leading-6 text-white rounded-lg font-medium  bg-[#FC5050] p-4 sm:ml-4' onClick={onConfirm}>Move To Wishlist</button>
         </div>
       </div>
     </div>

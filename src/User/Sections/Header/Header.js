@@ -14,6 +14,8 @@ function Header() {
   const [language, setLanguage] = useState('ENG');
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [activeSubcategory, setActiveSubcategory] = useState(null);
+  const [subSubcategories, setSubSubcategories] = useState([]);
 
   useEffect(() => {
     axios.get('http://194.238.23.134:3000/api/categories')
@@ -33,6 +35,8 @@ function Header() {
   const handleMouseLeave = () => {
     setShowSubmenu(false);
     setActiveCategory(null);
+    setActiveSubcategory(null);
+    setSubSubcategories([]);
   };
 
   const handleCategoryMouseEnter = (categoryId) => {
@@ -48,9 +52,16 @@ function Header() {
     setIsOpen(false);
   };
 
-  const handleMouseLeave1 = () => {
-    setShowSubmenu(false);
-    setActiveCategory(null);
+  const handleSubcategoryMouseEnter = (subcategoryId) => {
+    setActiveSubcategory(subcategoryId);
+    // Fetch sub-subcategories
+    axios.get(`http://194.238.23.134:3000/api/subcategories/${subcategoryId}/sub-subcategories`)
+      .then(response => {
+        setSubSubcategories(response.data.data);
+      })
+      .catch(error => {
+        console.log("Failed to load sub-subcategories");
+      });
   };
 
   return (
@@ -132,16 +143,32 @@ function Header() {
           <div key={category.id} 
                className='relative flex font-normal sm:text-[14px] sm:leading-[16px] sm:my-auto sm:ml-[24px] cursor-pointer hover:text-[#304BA0] hover:underline hover:underline-offset-[28px]'
                onMouseEnter={() => handleCategoryMouseEnter(category.id)}
-               onMouseLeave={handleMouseLeave1}
+               onMouseLeave={handleMouseLeave}
           >
             {category.name}
             <img className='sm:w-[16px] sm:h-[9px] sm:ml-[7px] sm:my-auto' src={DropDownArrow} alt="Arrow" />
             {activeCategory === category.id && (
-              <div className="fixed bg-white border z-50 border-[#D4D4D4] w-[898px] columns-5 text-black mt-[45px]  text-start font-semibold" style={{  left: '312px' }}>
-                {category.subCategories.length > 0 ? (
+              <div className="fixed bg-white border z-50 border-[#D4D4D4] w-[898px] columns-5 text-black  text-start font-semibold" style={{  left: '312px' }}>
+                {category.subCategories && category.subCategories.length > 0 ? (
                   category.subCategories.map(subcategory => (
-                    <div key={subcategory.id} className="submenu-item p-2 hover:bg-gray-200 cursor-pointer">
+                    <div key={subcategory.id} 
+                         className="submenu-item p-2 hover:bg-gray-200 cursor-pointer"
+                         onMouseEnter={() => handleSubcategoryMouseEnter(subcategory.id)}
+                    >
                       {subcategory.name}
+                      {activeSubcategory === subcategory.id && (
+                        <div className="absolute bg-white border z-50 border-[#D4D4D4]  w-[200px] text-black text-start font-normal">
+                          {subSubcategories.length > 0 ? (
+                            subSubcategories.map(subSubcategory => (
+                              <div key={subSubcategory.id} className="submenu-item p-2 hover:bg-gray-200 cursor-pointer">
+                                {subSubcategory.name}
+                              </div>
+                            ))
+                          ) : (
+                            <div className="submenu-item p-2">Loading...</div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   ))
                 ) : (
