@@ -43,6 +43,16 @@ function Header() {
     setActiveCategory(categoryId);
   };
 
+  const handleSubcategoryMouseEnter = (subcategory) => {
+    setActiveSubcategory(subcategory.id);
+    // Extract sub-subcategories for the hovered subcategory
+    setSubSubcategories(subcategory.subSubcategories || []);
+    let subs = subcategory.subSubCategories.map(sub=>{
+      return sub.name
+    })
+    console.log(subs);
+  };
+
   const handleDropdownToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -50,18 +60,6 @@ function Header() {
   const handleLanguageChange = (lang) => {
     setLanguage(lang);
     setIsOpen(false);
-  };
-
-  const handleSubcategoryMouseEnter = (subcategoryId) => {
-    setActiveSubcategory(subcategoryId);
-    // Fetch sub-subcategories
-    axios.get(`http://194.238.23.134:3000/api/subcategories/${subcategoryId}/sub-subcategories`)
-      .then(response => {
-        setSubSubcategories(response.data.data);
-      })
-      .catch(error => {
-        console.log("Failed to load sub-subcategories");
-      });
   };
 
   return (
@@ -78,7 +76,7 @@ function Header() {
             <input className='w-[332px] focus:outline-none ml-[8px] bg-[#F9F9F9]' type="text" placeholder='Search for Medicines & Wellness Products' />
           </div>
           <div className='sm:w-[447px] sm:h-[56px] flex '>
-            <div className='btn  sm:w-[299px] sm:h-[56px] rounded-[8px]   bg-[#304BA0] sm:mt-[8px] text-white content-center cursor-pointer sm:leading-[18px] sm:text-[14px]'>
+            <div className='btn sm:w-[299px] sm:h-[56px] rounded-[8px] bg-[#304BA0] sm:mt-[8px] text-white content-center cursor-pointer sm:leading-[18px] sm:text-[14px]'>
               Book An Appointment
             </div>
             <div className="relative sm:ml-[40px] sm:my-auto py-[22px] flex">
@@ -126,7 +124,7 @@ function Header() {
           <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
           <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
           {showSubmenu && (
-            <div className="submenu absolute bg-white border z-50 border-[#D4D4D4] mt-[55px] w-[254px] text-start pt-6  pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal ">
+            <div className="submenu absolute bg-white border z-50 border-[#D4D4D4]  w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal ">
               {categories.length > 0 ? (
                 categories.map(category => (
                   <div key={category.id} className="submenu-item p-2 hover:bg-gray-200 cursor-pointer">
@@ -139,45 +137,94 @@ function Header() {
             </div>
           )}
         </div>
-        {categories.map((category) => (
-          <div key={category.id} 
-               className='relative flex font-normal sm:text-[14px] sm:leading-[16px] sm:my-auto sm:ml-[24px] cursor-pointer hover:text-[#304BA0] hover:underline hover:underline-offset-[28px]'
-               onMouseEnter={() => handleCategoryMouseEnter(category.id)}
-               onMouseLeave={handleMouseLeave}
+        {/* {categories && categories.map((category) => (
+        <div
+          key={category.id}
+          className="relative flex font-normal sm:text-[14px] sm:leading-[16px] sm:my-auto sm:ml-[24px] cursor-pointer hover:text-[#304BA0] hover:underline hover:underline-offset-[28px]"
+          onMouseEnter={() => handleCategoryMouseEnter(category.id)}
+          onMouseLeave={handleMouseLeave}
+        >
+          {category.name}
+          <img
+            className="sm:w-[16px] sm:h-[9px] sm:ml-[7px] sm:my-auto"
+            src={DropDownArrow}
+            alt="Arrow"
+          />
+          {activeCategory === category.id && (
+            <div
+              className="fixed bg-white border z-50 border-[#D4D4D4] w-[898px] columns-5 text-black text-start font-semibold"
+              style={{ left: '312px' }}
+            >
+              {category.subCategories && category.subCategories.map((subcategory) => (
+                <div
+                  key={subcategory.id}
+                  className="submenu-item p-2 hover:bg-gray-200 cursor-pointer"
+                  onMouseEnter={() => handleSubcategoryMouseEnter(subcategory.id)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {subcategory.name} 
+                  {activeSubcategory === subcategory.id && (
+                    <div className="absolute bg-white border z-50 border-[#D4D4D4] w-[200px] text-black text-start font-normal">
+                      {subcategory.subSubCategories && subcategory.subSubCategories.map((subSubcategory) => (
+                        <div
+                          key={subSubcategory.id}
+                          className="submenu-item p-2 hover:bg-gray-200 cursor-pointer"
+                        >
+                          {subSubcategory.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))} */}
+        {categories && categories.map((category) => (
+          <div
+            key={category.id}
+            className="relative flex font-normal sm:text-[14px] sm:leading-[16px] sm:my-auto sm:ml-[24px] cursor-pointer hover:text-[#304BA0] hover:underline hover:underline-offset-[28px]"
+            onMouseEnter={() => handleCategoryMouseEnter(category.id)}
+            onMouseLeave={handleMouseLeave}
           >
             {category.name}
-            <img className='sm:w-[16px] sm:h-[9px] sm:ml-[7px] sm:my-auto' src={DropDownArrow} alt="Arrow" />
+            <img
+              className="sm:w-[16px] sm:h-[9px] sm:ml-[7px] sm:my-auto"
+              src={DropDownArrow}
+              alt="Arrow"
+            />
             {activeCategory === category.id && (
-              <div className="fixed bg-white border z-50 border-[#D4D4D4] w-[898px] columns-5 text-black  text-start font-semibold" style={{  left: '312px' }}>
-                {category.subCategories && category.subCategories.length > 0 ? (
-                  category.subCategories.map(subcategory => (
-                    <div key={subcategory.id} 
-                         className="submenu-item p-2 hover:bg-gray-200 cursor-pointer"
-                         onMouseEnter={() => handleSubcategoryMouseEnter(subcategory.id)}
-                    >
-                      {subcategory.name}
-                      {activeSubcategory === subcategory.id && (
-                        <div className="absolute bg-white border z-50 border-[#D4D4D4]  w-[200px] text-black text-start font-normal">
-                          {subSubcategories.length > 0 ? (
-                            subSubcategories.map(subSubcategory => (
-                              <div key={subSubcategory.id} className="submenu-item p-2 hover:bg-gray-200 cursor-pointer">
-                                {subSubcategory.name}
-                              </div>
-                            ))
-                          ) : (
-                            <div className="submenu-item p-2">Loading...</div>
-                          )}
+              <div
+                className="fixed bg-white border z-50 border-[#D4D4D4] w-[898px] columns-5 text-black text-start font-semibold"
+                style={{ left: '312px' }}
+              >
+                {category.subCategories && category.subCategories.map((subcategory) => (
+                  <div
+                    key={subcategory.id}
+                    className="submenu-item p-2 hover:bg-gray-200 cursor-pointer"
+                    onMouseEnter={() => handleSubcategoryMouseEnter(subcategory)}
+                  >
+                    {subcategory.name}
+                    {activeSubcategory === subcategory.id && (
+                      <div className="absolute bg-white border z-50 border-[#D4D4D4] w-[200px] text-black text-start font-normal">
+                        <div>
+                          {subcategory.subSubCategories.map(subSubcategory => (
+                            <div key={subSubcategory.id}> {/* Make sure to add a unique key for each child */}
+                              {subSubcategory.name} {/* Return the name */}
+                            </div>
+                          ))}
                         </div>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <div className="submenu-item p-2">Loading...</div>
-                )}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             )}
           </div>
         ))}
+
+
       </div>
     </div>
   );
