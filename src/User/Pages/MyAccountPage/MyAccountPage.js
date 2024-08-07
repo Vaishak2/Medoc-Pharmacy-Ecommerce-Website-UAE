@@ -7,6 +7,7 @@ import OrderIcon from '../../../Assets/Icons/order.png'
 import MyOrders from '../../Components/MyAccountComponents/MyOrders/MyOrders'
 import MyWishlist from '../../Components/MyAccountComponents/MyWishlist/MyWishlist'
 import SavedAddress from '../../Components/MyAccountComponents/SavedAddress/SavedAddress'
+import PDPProductPolicy from '../../Components/PDPProductPolicy/PDPProductPolicy'
 
 function MyAccountPage() {
 
@@ -17,12 +18,12 @@ function MyAccountPage() {
     }
 
     return (
-        <div className='bg-[#FAFAFA]'>
-            <div className='w-[1200px] mx-auto pt-[48px] pb-[48px]'>
+        <div className='bg-[#FAFAFA]  pb-[73px]'>
+            <div className='w-[1200px] mx-auto pt-[48px]'>
                 <div className='text-[18px] leading-6 font-semibold text-left'>My Account</div>
                 <div className=' flex justify-between mt-6'>
 
-                    <div className='sm:w-[282px] bg-[#FFFFFF] rounded-lg'>
+                    <div className='sm:w-[282px] bg-[#FFFFFF] rounded-lg sm:h-fit'>
 
                         <div className='mt-[32px]'>
                             <div className='sm:w-[70px] sm:h-[70px] border mx-auto p-1 rounded-full'>
@@ -72,7 +73,13 @@ function MyAccountPage() {
                     </div>
 
                 </div>
+
+                
+
             </div>
+
+            <PDPProductPolicy/>
+
         </div>
     )
 }
