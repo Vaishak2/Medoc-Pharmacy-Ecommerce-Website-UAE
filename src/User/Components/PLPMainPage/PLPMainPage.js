@@ -13,6 +13,7 @@ import PriceRangeSlider from './PriceRangeSlider.js';
 //vnshcode
 import axios from 'axios';
 import DropDown from "../../../Assets/Icons/chevron_forward.png";
+import Api from '../../../Services/Api.js'
 
 //vnshcode
 const sortingOptions = [
@@ -24,7 +25,7 @@ const sortingOptions = [
 
 function PLPMainPage() {
 
-    const [products, setProducts] = useState(productsData);
+    const [products, setProducts] = useState([]);
     const [selectedBrands, setSelectedBrands] = useState([]);
 
     //vnshcode
@@ -34,9 +35,9 @@ function PLPMainPage() {
     const [selectedSortOption, setSelectedSortOption] = useState(sortingOptions[0].name);
     const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-        applyFilters();
-    }, [selectedBrands])
+    // useEffect(() => {
+    //     applyFilters();
+    // }, [selectedBrands])
 
     const handleBrandSelection = (brand) => {
         setSelectedBrands((prevSelectedBrands) =>
@@ -57,7 +58,7 @@ function PLPMainPage() {
             return true;
         })
 
-        setProducts(filteredProducts);
+        // setProducts(filteredProducts);
     }
 
 
@@ -73,31 +74,31 @@ function PLPMainPage() {
     const handleSubcategoryClick = (subcategory) => {
         setSelectedSubcategory(subcategory);
         setShowSubcategoryDropdown(false);
-        fetchProducts(subcategory, selectedSortOption);
+        // fetchProducts(subcategory, selectedSortOption);
     };
 
     const handleSortOptionClick = (option) => {
         setSelectedSortOption(option);
         setShowSortDropdown(false);
-        fetchProducts(selectedSubcategory, option);
+        // fetchProducts(selectedSubcategory, option);
     };
 
-    const fetchProducts = async (subcategory, sortOption) => {
-        try {
-            const response = await axios.get('http://194.238.23.134:3000/api/categories', {
-                params: {
-                    subcategory: subcategory,
-                    sort: sortOption
-                }
+    // const fetchProducts = async (subcategory, sortOption) => {
+    //     try {
+    //         const response = await axios.get('http://194.238.23.134:3000/api/categories', {
+    //             params: {
+    //                 subcategory: subcategory,
+    //                 sort: sortOption
+    //             }
 
-            });
+    //         });
 
-            setProducts(response.data);
+    //         setProducts(response.data);
 
-        } catch (error) {
+    //     } catch (error) {
            
-        }
-    };
+    //     }
+    // };
 
     const fetchCategories = async () => {
         try {
@@ -105,7 +106,7 @@ function PLPMainPage() {
             setCategories(response.data);
             if (response.data.length > 0) {
                 setSelectedSubcategory(response.data[0].name);
-                fetchProducts(response.data[0].name, selectedSortOption);
+                // fetchProducts(response.data[0].name, selectedSortOption);
             }
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -215,10 +216,28 @@ function PLPMainPage() {
 
     ]
 
-    //vnshcode
+
+
     useEffect(() => {
-        fetchCategories();
-    }, []);
+        Api.post('productListing', {
+            "userId": 1,
+            "subCategoryId": 5,
+            "subSubCategoryId":1,
+            "pageNumber": 1,
+            "sortBy": "newest",
+            "searchKeyWord": "",
+            "brands": [],
+            "startPrice": 10,
+            "endPrice": 500
+        })
+        .then(response => {
+            // setProducts(response.data.data)
+            setProducts(response.data.data.products)
+            console.log(response.data.data.products)
+        })
+    },[])
+
+    
 
 
     return (
@@ -333,7 +352,7 @@ function PLPMainPage() {
                     </div>
 
                     <div className='products-list grid sm:grid-cols-3 gap-[24px]'>
-                        {productList.map((product, index) => (
+                        {products.map((product, index) => (
 
                             <div className='sm:w-[282px] sm:h-[421px] '>
                                 <div className='sm:w-[282px] sm:h-[213px] bg-[#ececec] rounded-[8px] pt-[11px] '>
@@ -343,7 +362,7 @@ function PLPMainPage() {
                                         alt=""
                                         onClick={() => toggleFavorite(index)}
                                     />
-                                    <img className='sm:w-[103] sm:h-[132px] mx-auto ' src={product.image} alt="" />
+                                    <img className='sm:w-[103] sm:h-[132px] mx-auto ' src={product.image_url} alt="" />
                                     <div className='sm:w-[69px] sm:h-[28px] border bg-[#ffff] rounded-[4px] flex ml-[10px] mt-[4px]  '>
                                         <div className=' flex text-center ml-[12px] '>
                                             <img className='sm:w-[16px] sm:h-[16px] mt-[6px] ' src={Star} alt="" />
