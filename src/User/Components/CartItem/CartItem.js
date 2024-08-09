@@ -32,7 +32,7 @@ function CartItem() {
       discount: '30% OFF',
       size: '250 ml',
       quantity: 1,
-      outOfStock: true,
+      outOfStock: true, 
       image: CartImg,
     },
     {
