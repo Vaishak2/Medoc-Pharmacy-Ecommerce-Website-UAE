@@ -8,6 +8,7 @@ import MyOrders from '../../Components/MyAccountComponents/MyOrders/MyOrders'
 import MyWishlist from '../../Components/MyAccountComponents/MyWishlist/MyWishlist'
 import SavedAddress from '../../Components/MyAccountComponents/SavedAddress/SavedAddress'
 import PDPProductPolicy from '../../Components/PDPProductPolicy/PDPProductPolicy'
+import EditProfile from '../../Components/MyAccountComponents/EditProfile/EditProfile'
 
 function MyAccountPage() {
 
@@ -30,7 +31,7 @@ function MyAccountPage() {
                                 <div className='w-full h-full bg-[#575757] text-white text-[24px] flex items-center justify-center rounded-full'>V</div>
                             </div>
                             <div className='text-[14px] font-medium leading-5 mt-4'>Vineesh Raj</div>
-                            <div className='flex items-center justify-center gap-2 mt-2'>
+                            <div className='flex items-center justify-center gap-2 mt-2 cursor-pointer' onClick={()=>toggleTab(4)}>
                                 <div>
                                     <img className='h-[16px] w-[16px]' src={Edit}></img>
                                 </div>
@@ -70,6 +71,7 @@ function MyAccountPage() {
                         <div className={toggleState === 1 ? 'accountContent active-accountContent' : 'accountContent'}><MyOrders/></div>
                         <div className={toggleState === 2 ? 'accountContent active-accountContent' : 'accountContent'}><MyWishlist/></div>
                         <div className={toggleState === 3 ? 'accountContent active-accountContent' : 'accountContent'}><SavedAddress/></div>
+                        <div className={toggleState === 4 ? 'accountContent active-accountContent' : 'accountContent'}><EditProfile/></div>
                     </div>
 
                 </div>
