@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react'
 import MaleIcon from "../../../../Assets/Icons/maleIcon.svg"
 import FemaleIcon from "../../../../Assets/Icons/femaleIcon.svg"
@@ -89,8 +90,5 @@ function EditProfile() {
       <div className='sm:mt-8 sm:text-[14px] sm:leading-6 cursor-pointer'>
       Delete Account
       </div>
-    </div>
-  )
-}
 
-export default EditProfile
+
