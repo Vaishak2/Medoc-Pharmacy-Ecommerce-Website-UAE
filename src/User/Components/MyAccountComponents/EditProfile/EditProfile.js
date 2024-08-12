@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import MaleIcon from "../../../../Assets/Icons/maleIcon.svg"
 import FemaleIcon from "../../../../Assets/Icons/femaleIcon.svg"
 
-function EditProfile() {
+function EditProefil() {
   const [gender, setGender] = useState('male');
 
   const [isFocused, setIsFocused] = useState(false);
@@ -90,5 +90,8 @@ function EditProfile() {
       <div className='sm:mt-8 sm:text-[14px] sm:leading-6 cursor-pointer'>
       Delete Account
       </div>
+      </div>
+  )
+}
 
-
+export default EditProefil;
