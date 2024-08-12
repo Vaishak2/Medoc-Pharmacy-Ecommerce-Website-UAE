@@ -34,7 +34,7 @@ function DeleteAccount() {
         All your data will permanently erase from this app, including your order history, saved details, coupons, and benefits. Any pending orders, exchanges, returns, or refunds will no longer be accessible via your account.
       </div>
       <div className="flex sm:mt-[388px]" onClick={handleCheckboxClick}>
-        <img src={isChecked ? CheckBox : UnCheckBox} alt="Checkbox" /> 
+        <img className='sm:w-6 sm:h-6' src={isChecked ? CheckBox : UnCheckBox} alt="Checkbox" /> 
         <div className="sm:ml-4 sm:text-[14px] sm:leading-6 sm:tracking-tighter sm:font-normal">
           I agree to all the terms and conditions
         </div>
@@ -45,13 +45,13 @@ function DeleteAccount() {
       )}
       <div className="flex sm:mt-8">
         <button className="border border-[#304BA0] rounded-lg sm:py-4 sm:px-[178px] sm:text-[14px] sm:leading-4 font-semibold text-[#304BA0]">
-          Cancel
+          Delete
         </button>
         <button 
-          className="border rounded-lg sm:py-4 sm:px-[178px] sm:text-[14px] sm:leading-4 font-semibold bg-[#304BA0] text-white sm:ml-4 hover:bg-[#3e5fc5]" 
+          className="border rounded-lg sm:py-4 sm:px-[155px] sm:text-[14px] sm:leading-4 font-semibold bg-[#304BA0] text-white sm:ml-4 hover:bg-[#3e5fc5]" 
           onClick={handleUpdateClick}
         >
-          Update
+          Keep Account
         </button>
       </div>
     </div>
