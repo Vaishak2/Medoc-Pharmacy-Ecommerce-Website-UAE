@@ -44,12 +44,13 @@ function DeleteAccount() {
         <p className="text-red-500 text-sm mt-1 text-justify">{errors.checkbox}</p>
       )}
       <div className="flex sm:mt-8">
-        <button className="border border-[#304BA0] rounded-lg sm:py-4 sm:px-[178px] sm:text-[14px] sm:leading-4 font-semibold text-[#304BA0]">
+        <button className="border border-[#304BA0] rounded-lg sm:py-4 sm:px-[178px] sm:text-[14px] sm:leading-4 font-semibold text-[#304BA0]"
+          onClick={handleUpdateClick}>
           Delete
         </button>
         <button 
           className="border rounded-lg sm:py-4 sm:px-[155px] sm:text-[14px] sm:leading-4 font-semibold bg-[#304BA0] text-white sm:ml-4 hover:bg-[#3e5fc5]" 
-          onClick={handleUpdateClick}
+        
         >
           Keep Account
         </button>
