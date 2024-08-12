@@ -3,22 +3,23 @@ import LocateIcon from '../../../../Assets/Icons/my_location.png'
 
 function AddNewAddress() {
 
-    const [addressTitle, setAddressTitle] = useState()
+    const [addressTitle, setAddressTitle] = useState('')
     const [addressTitleError, setAddressTitleError] = useState(false)
-    const [name, setName] = useState()
+    const [name, setName] = useState('')
     const [nameError, setNameError] = useState(false)
-    const [phoneNumber, setPhoneNumber] = useState()
+    const [phoneNumber, setPhoneNumber] = useState('')
     const [phoneNumberError, setPhoneNumberError] = useState(false)
-    const [houseName,setHouseName] = useState()
-    const [houseNameError,setHouseNameError] = useState(false)
-    const [streetName, setStreetName] = useState()
+    const [houseName, setHouseName] = useState('')
+    const [houseNameError, setHouseNameError] = useState(false)
+    const [streetName, setStreetName] = useState('')
     const [streetNameError, setStreetNameError] = useState(false)
-    const [town, setTown] = useState()
+    const [town, setTown] = useState('')
     const [townError, setTownError] = useState(false)
-    const [country, setCountry] = useState()
+    const [country, setCountry] = useState('')
     const [countryError, setCountryError] = useState(false)
-    const [emirate, setEmirate] = useState()
+    const [emirate, setEmirate] = useState('')
     const [emirateError, setEmirateError] = useState(false)
+    const [landmark, setLandmark] = useState('')
 
     const addressTitleValidation = () => {
         if (!addressTitle) {
@@ -46,57 +47,57 @@ function AddNewAddress() {
         if (!phoneNumber) {
             setPhoneNumberError(true)
         }
-        else if(result===false) {
+        else if (result === false) {
             setPhoneNumberError(true)
         }
         else setPhoneNumberError(false)
     }
 
     const houseNameValidation = () => {
-        if(!houseName) {
+        if (!houseName) {
             setHouseNameError(true)
         }
-        else if(houseName.length < 1) {
+        else if (houseName.length < 1) {
             setHouseNameError(true)
         }
         else setHouseNameError(false)
     }
 
     const streetNameValidation = () => {
-        if(!streetName) {
+        if (!streetName) {
             setStreetNameError(true)
         }
-        else if(streetName.length < 1) {
+        else if (streetName.length < 1) {
             setStreetNameError(true)
         }
         else setStreetNameError(false)
     }
 
     const townValidation = () => {
-        if(!town) {
+        if (!town) {
             setTownError(true)
         }
-        else if(town.length < 1) {
+        else if (town.length < 1) {
             setTownError(true)
         }
         else setTownError(false)
     }
 
     const countryValidation = () => {
-        if(!country) {
+        if (!country) {
             setCountryError(true)
         }
-        else if(country.length < 1) {
+        else if (country.length < 1) {
             setCountryError(true)
         }
         else setCountryError(false)
     }
 
     const emirateValidation = () => {
-        if(!emirate) {
+        if (!emirate) {
             setEmirateError(true)
         }
-        else if(emirate.length < 1) {
+        else if (emirate.length < 1) {
             setEmirateError(true)
         }
         else setEmirateError(false)
@@ -111,6 +112,30 @@ function AddNewAddress() {
         townValidation();
         countryValidation();
         emirateValidation();
+
+        
+    }
+
+    const resetForm = () => {
+        setAddressTitle('');
+        setName('');
+        setPhoneNumber('');
+        setHouseName('');
+        setStreetName('');
+        setTown('');
+        setCountry('');
+        setEmirate('');
+        setLandmark('')
+
+        // Reset all error states
+        setAddressTitleError(false);
+        setNameError(false);
+        setPhoneNumberError(false);
+        setHouseNameError(false);
+        setStreetNameError(false);
+        setTownError(false);
+        setCountryError(false);
+        setEmirateError(false);
     }
 
     return (
@@ -129,7 +154,7 @@ function AddNewAddress() {
                 <div className='text-[14px] font-medium text-left'>Address Title</div>
                 <div className='grid grid-cols-2 gap-6'>
                     <div>
-                        <input type='text' placeholder='Home, Office, Personal..etc (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setAddressTitle(e.target.value)}></input>
+                        <input type='text' value={addressTitle} placeholder='Home, Office, Personal..etc (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setAddressTitle(e.target.value)}></input>
                         {addressTitleError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your address title</div> : null}
                     </div>
                 </div>
@@ -140,12 +165,12 @@ function AddNewAddress() {
                 <div className='grid grid-cols-2 gap-x-6'>
                     <div>
                         <div className='text-[14px] text-left mt-4'>Name</div>
-                        <input type='text' placeholder='Type your name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setName(e.target.value)}></input>
+                        <input type='text' value={name} placeholder='Type your name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setName(e.target.value)}></input>
                         {nameError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your name</div> : null}
                     </div>
                     <div>
                         <div className='text-[14px] text-left mt-4'>Phone number</div>
-                        <input type='text' placeholder='+971 (555) 000-0000 (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setPhoneNumber(e.target.value)}></input>
+                        <input type='text' value={phoneNumber} placeholder='+971 (555) 000-0000 (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setPhoneNumber(e.target.value)}></input>
                         {phoneNumberError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter a valid phone number</div> : null}
                     </div>
                 </div>
@@ -156,38 +181,38 @@ function AddNewAddress() {
                 <div className='grid grid-cols-2 gap-x-6'>
                     <div>
                         <div className='text-[14px] text-left mt-4'>House Name</div>
-                        <input type='text' placeholder='Enter house name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setHouseName(e.target.value)}></input>
+                        <input type='text' value={houseName} placeholder='Enter house name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setHouseName(e.target.value)}></input>
                         {houseNameError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your house name</div> : null}
                     </div>
                     <div>
                         <div className='text-[14px] text-left mt-4'>street Name</div>
-                        <input type='text' placeholder='Type street name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setStreetName(e.target.value)}></input>
+                        <input type='text' value={streetName} placeholder='Type street name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setStreetName(e.target.value)}></input>
                         {streetNameError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your street name</div> : null}
                     </div>
                     <div>
                         <div className='text-[14px] text-left mt-4'>Town</div>
-                        <input type='text' placeholder='Enter town/city name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setTown(e.target.value)}></input>
+                        <input type='text' value={town} placeholder='Enter town/city name (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setTown(e.target.value)}></input>
                         {townError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your town</div> : null}
                     </div>
                     <div>
                         <div className='text-[14px] text-left mt-4'>Country</div>
-                        <input type='text' placeholder='Enter Country (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setCountry(e.target.value)}></input>
+                        <input type='text' value={country} placeholder='Enter Country (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setCountry(e.target.value)}></input>
                         {countryError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your country</div> : null}
                     </div>
                     <div>
                         <div className='text-[14px] text-left mt-4'>Emirate</div>
-                        <input type='text' placeholder='Enter State  (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e)=>setEmirate(e.target.value)}></input>
+                        <input type='text' value={emirate} placeholder='Enter State  (Required)' className='sm:w-[403px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setEmirate(e.target.value)}></input>
                         {emirateError ? <div className='text-[14px] text-left text-[#FC5050] mt-2'>Please enter your emirate</div> : null}
                     </div>
                 </div>
                 <div>
                     <div className='text-[14px] text-left mt-4'>Landmark (Optional)</div>
-                    <textarea type='text' placeholder='Provide your landmark (If any)' className='sm:w-full sm:h-[136px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2'></textarea>
+                    <textarea type='text' value={landmark} placeholder='Provide your landmark (If any)' className='sm:w-full sm:h-[136px] border-2 border-[#dddddd] text-[14px] py-3 px-[18px] rounded-lg placeholder:text-[#B3B3B3] mt-2' onChange={(e) => setLandmark(e.target.value)}></textarea>
                 </div>
             </div>
 
             <div className='grid grid-cols-2 gap-x-6 mt-8'>
-                <div className='sm:w-[403px] sm:h-[56px] text-[14px] font-medium flex items-center justify-center border-2 border-[#304BA0] rounded-lg cursor-pointer'>Reset</div>
+                <div className='sm:w-[403px] sm:h-[56px] text-[14px] font-medium flex items-center justify-center border-2 border-[#304BA0] rounded-lg cursor-pointer' onClick={resetForm}>Reset</div>
                 <div className='bg-[#304BA0] sm:w-[403px] sm:h-[56px] text-[14px] text-[#FFFFFF] font-medium flex items-center justify-center rounded-lg hover:bg-[#3E5FC5] cursor-pointer' onClick={handleSubmit}>Save Address</div>
             </div>
 
