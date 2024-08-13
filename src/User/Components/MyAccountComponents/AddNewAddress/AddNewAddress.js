@@ -113,6 +113,19 @@ function AddNewAddress() {
         countryValidation();
         emirateValidation();
 
+        if(addressTitleError||nameError||phoneNumberError||houseNameError) {
+            alert('Fail')
+            return
+        }
+
+            setAddressTitle('')
+            setName('')
+            setPhoneNumber('')
+            setHouseName('')
+            console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+            alert('success')
+
+    
         
     }
 
