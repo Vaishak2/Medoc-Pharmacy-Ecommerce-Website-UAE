@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import UnCheckBox from "../../../../Assets/Icons/UnCheckedBox.svg";
 import CheckBox from "../../../../Assets/Icons/checkBox.svg";
+import DeleteAccountOTP from '../DeleteAccountOTP/DeleteAccountOTP';
 
 function DeleteAccountReason() {
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [error, setError] = useState('');
+
+  const [isDelete, setIsDelete] = useState(false)
 
   const reasons = [
     "I find the products very expensive",
@@ -26,15 +29,19 @@ function DeleteAccountReason() {
 
   const handleDeleteAccount = () => {
     if (selectedReasons.length === 0) {
-      setError('Please select at least one reason before proceeding.');
+      setError('Please se
+               lect at least one reason before proceeding.');
     } else {
       // Proceed with account deletion logic
+      setIsDelete(!isDelete)
       console.log('Proceeding with account deletion...');
     }
   };
 
+
   return (
     <div>
+    {isDelete ? <DeleteAccountOTP/> :
       <div className="sm:text-justify">
         <div className="sm:text-[16px] sm:leading-6 font-semibold text-left">Delete Account</div>
         <div className="sm:text-[14px] sm:leading-5 sm:font-semibold sm:mt-8">
@@ -60,6 +67,7 @@ function DeleteAccountReason() {
           name="" 
           id=""
         />
+
         <div 
           className='border border-[#304BA0] rounded-lg sm:w-[833px] sm:py-[19px] justify-center pl-[362px] sm:text-[14px] sm:leading-[18px] sm:font-semibold sm:mt-[163px] text-[#304BA0] cursor-pointer'
           onClick={handleDeleteAccount}
@@ -67,6 +75,7 @@ function DeleteAccountReason() {
           Delete Account
         </div>
       </div>
+    }
     </div>
   );
 }
