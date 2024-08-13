@@ -3,7 +3,8 @@ import UnCheckBox from "../../../../Assets/Icons/UnCheckedBox.svg";
 import CheckBox from "../../../../Assets/Icons/checkBox.svg";
 
 function DeleteAccountReason() {
-  const [selectedReason, setSelectedReason] = useState(null);
+  const [selectedReasons, setSelectedReasons] = useState([]);
+  const [error, setError] = useState('');
 
   const reasons = [
     "I find the products very expensive",
@@ -13,7 +14,23 @@ function DeleteAccountReason() {
   ];
 
   const handleCheckboxClick = (index) => {
-    setSelectedReason(index);
+    setSelectedReasons(prevSelectedReasons => {
+      if (prevSelectedReasons.includes(index)) {
+        return prevSelectedReasons.filter(i => i !== index);
+      } else {
+        return [...prevSelectedReasons, index];
+      }
+    });
+    setError(''); // Clear error when a checkbox is selected
+  };
+
+  const handleDeleteAccount = () => {
+    if (selectedReasons.length === 0) {
+      setError('Please select at least one reason before proceeding.');
+    } else {
+      // Proceed with account deletion logic
+      console.log('Proceeding with account deletion...');
+    }
   };
 
   return (
@@ -28,13 +45,14 @@ function DeleteAccountReason() {
             <div key={index} className='flex sm:mt-4' onClick={() => handleCheckboxClick(index)}>
               <img 
                 className='sm:w-6 sm:h-6 cursor-pointer' 
-                src={selectedReason === index ? CheckBox : UnCheckBox} 
+                src={selectedReasons.includes(index) ? CheckBox : UnCheckBox} 
                 alt="" 
               />
               <div className='sm:ml-3 sm:text-[14px] sm:leading-[18px]'>{reason}</div>
             </div>
           ))}
         </div>
+        {error && <div className="text-red-500 sm:mt-4">{error}</div>}
         <textarea 
           type="text" 
           placeholder='Add your suggestions here' 
@@ -42,7 +60,10 @@ function DeleteAccountReason() {
           name="" 
           id=""
         />
-        <div className='border border-[#304BA0] rounded-lg sm:w-[833px] sm:py-[19px] justify-center pl-[362px] sm:text-[14px] sm:leading-[18px] sm:font-semibold sm:mt-[163px] text-[#304BA0] cursor-pointer'>
+        <div 
+          className='border border-[#304BA0] rounded-lg sm:w-[833px] sm:py-[19px] justify-center pl-[362px] sm:text-[14px] sm:leading-[18px] sm:font-semibold sm:mt-[163px] text-[#304BA0] cursor-pointer'
+          onClick={handleDeleteAccount}
+        >
           Delete Account
         </div>
       </div>
