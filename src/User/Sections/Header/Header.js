@@ -63,7 +63,7 @@ function Header() {
   };
 
   return (
-    <div className='main-container sm:w-[1440px] mx-auto sticky top-0 z-50 bg-white op'>
+    <div className='main-container sm:w-[1440px] mx-auto sticky top-0 z-50 bg-white'>
       <div className='sm:w-[1440px]'>
         <div className='logo-section sm:h-[71px] mt-[16px] sm:mx-[120px] justify-between gap-1  sm:flex'>
           <div>

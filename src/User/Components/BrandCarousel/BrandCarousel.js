@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +12,9 @@ import BrandImg4 from '../../../Assets/Brand images/brand 4.png'
 import BrandImg5 from '../../../Assets/Brand images/brand 5.png'
 import BrandImg6 from '../../../Assets/Brand images/brand 6.png'
 import './BrandCarousel.css'
+import Api from '../../../Services/Api';
+
+
 
 
 const NextArrow = (props) => {
@@ -62,68 +65,15 @@ const settings = {
 
 function BrandCarousel() {
 
-    const products = [
-        {
-            "product_id": 1,
-            "product_name": "Wireless Mouse",
-            "image_url": BrandImg1,
-            "description": "A sleek and ergonomic wireless mouse with high precision and long battery life."
-        },
-        {
-            "product_id": 2,
-            "product_name": "Bluetooth Headphones",
-            "image_url": BrandImg2,
-            "description": "Noise-cancelling Bluetooth headphones with superior sound quality and comfortable fit."
-        },
-        {
-            "product_id": 3,
-            "product_name": "Smart Watch",
-            "image_url": BrandImg3,
-            "description": "A versatile smart watch with fitness tracking, heart rate monitoring, and customizable watch faces."
-        },
-        {
-            "product_id": 4,
-            "product_name": "Portable Speaker",
-            "image_url": BrandImg4,
-            "description": "A compact portable speaker with powerful sound and long-lasting battery for outdoor use."
-        },
-        {
-            "product_id": 5,
-            "product_name": "External Hard Drive",
-            "image_url": BrandImg5,
-            "description": "A high-capacity external hard drive with fast data transfer speeds and durable design."
-        },
-        {
-            "product_id": 6,
-            "product_name": "Wireless Mouse",
-            "image_url": BrandImg6,
-            "description": "A sleek and ergonomic wireless mouse with high precision and long battery life."
-        },
-        {
-            "product_id": 7,
-            "product_name": "Bluetooth Headphones",
-            "image_url": BrandImg1,
-            "description": "Noise-cancelling Bluetooth headphones with superior sound quality and comfortable fit."
-        },
-        {
-            "product_id": 8,
-            "product_name": "Smart Watch",
-            "image_url": BrandImg2,
-            "description": "A versatile smart watch with fitness tracking, heart rate monitoring, and customizable watch faces."
-        },
-        {
-            "product_id": 9,
-            "product_name": "Portable Speaker",
-            "image_url": BrandImg3,
-            "description": "A compact portable speaker with powerful sound and long-lasting battery for outdoor use."
-        },
-        {
-            "product_id": 10,
-            "product_name": "External Hard Drive",
-            "image_url": BrandImg4,
-            "description": "A high-capacity external hard drive with fast data transfer speeds and durable design."
-        }
-    ];
+    const [brands, setBrands] = useState([])
+
+    useEffect(() => {
+        Api.get('top_brands')
+        .then(response => {
+            console.log(response.data.data,'bbbbbbbb')
+            setBrands(response.data.data)
+        })
+    },[])
 
 
   return (
@@ -138,10 +88,10 @@ function BrandCarousel() {
     <div className='pt-[24px]'>
 
         <Slider {...settings}>
-            {products.map((product) => (
-                <div className='brandCard text-black rounded-full border border-[#D9D9D9] px-[8px] py-[8px]' key={product.id}>
+            {brands.map((brand) => (
+                <div className='brandCard text-black rounded-full border border-[#D9D9D9] px-[8px] py-[8px]' key={brand.id}>
                     <div className='h-[164px] w-[164px] bg-[#EFEFEF] rounded-full flex items-center justify-center'>
-                        <img src={product.image_url} className='sm:w-[99px] sm:h-[99px] rounded-full' alt={product.product_name} />
+                        <img src={brand.logo_url} className='sm:w-[99px] sm:h-[99px] rounded-full' alt={brand.brand_name} />
                     </div>
                 </div>
             ))}
