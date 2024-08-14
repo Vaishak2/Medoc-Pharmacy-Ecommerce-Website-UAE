@@ -7,6 +7,7 @@ import Fav from "../../../Assets/Icons/favorite.png";
 import AccountCircle from "../../../Assets/Icons/account_circle.png";
 import Menu from "../../../Assets/Icons/menu.png";
 import DropDownArrow from "../../../Assets/Icons/chevron_forward.png";
+import LogoutConfirmation from '../../Components/LogoutConfirmation/LogoutConfirmation';
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -16,6 +17,8 @@ function Header() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeSubcategory, setActiveSubcategory] = useState(null);
   const [subSubcategories, setSubSubcategories] = useState([]);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
   useEffect(() => {
     axios.get('http://194.238.23.134:3000/api/categories')
@@ -33,24 +36,24 @@ function Header() {
   };
 
   const handleMouseLeave = () => {
-    setShowSubmenu(false);
-    setActiveCategory(null);
-    setActiveSubcategory(null);
-    setSubSubcategories([]);
+    const timeout = setTimeout(() => {
+      setShowSubmenu(false);
+      setActiveCategory(null);
+      setActiveSubcategory(null);
+      setSubSubcategories([]);
+    }, 300);
+
+    setHoverTimeout(timeout);
   };
 
   const handleCategoryMouseEnter = (categoryId) => {
+    clearTimeout(hoverTimeout);
     setActiveCategory(categoryId);
   };
 
   const handleSubcategoryMouseEnter = (subcategory) => {
     setActiveSubcategory(subcategory.id);
-    // Extract sub-subcategories for the hovered subcategory
-    setSubSubcategories(subcategory.subSubcategories || []);
-    let subs = subcategory.subSubCategories.map(sub=>{
-      return sub.name
-    })
-    console.log(subs);
+    setSubSubcategories(subcategory.subSubCategories || []);
   };
 
   const handleDropdownToggle = () => {
@@ -62,10 +65,23 @@ function Header() {
     setIsOpen(false);
   };
 
+  const handleLoginClick = () => {
+    setIsModalOpen(true); // Show the modal
+  };
+
+  const handleLogoutConfirm = () => {
+    setIsModalOpen(false);
+    // Add your logout logic here
+    console.log("User logged out");
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className='main-container sm:w-[1440px] mx-auto sticky top-0 z-50 bg-white'>
       <div className='sm:w-[1440px]'>
-        <div className='logo-section sm:h-[71px] mt-[16px] sm:mx-[120px] justify-between gap-1  sm:flex'>
+        <div className='logo-section sm:h-[71px] mt-[16px] sm:mx-[120px] justify-between gap-1 sm:flex'>
           <div>
             <div className='logo'>
               <img className='sm:w-[86px] sm:h-[71px] cursor-pointer' src={Logo} alt="Logo" />
@@ -75,7 +91,7 @@ function Header() {
             <img className='sm:w-[24px] sm:h-[24px] sm:ml-[16px] sm:my-[16px] cursor-pointer' src={SearchIcon} alt="Search" />
             <input className='w-[332px] focus:outline-none ml-[8px] bg-[#F9F9F9]' type="text" placeholder='Search for Medicines & Wellness Products' />
           </div>
-          <div className='sm:w-[447px] sm:h-[56px] flex '>
+          <div className='sm:w-[447px] sm:h-[56px] flex'>
             <div className='btn sm:w-[299px] sm:h-[56px] rounded-[8px] bg-[#304BA0] sm:mt-[8px] text-white content-center cursor-pointer sm:leading-[18px] sm:text-[14px]'>
               Book An Appointment
             </div>
@@ -108,7 +124,7 @@ function Header() {
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" />
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Cart} alt="Cart" />
             </div>
-            <div className='login-section flex cursor-pointer ml-[24px]'>
+            <div className='login-section flex cursor-pointer ml-[24px]' onClick={handleLoginClick}>
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px]' src={AccountCircle} alt="Account" />
               <div className='text-center justify-center mt-[24px] sm:ml-[8px] text-[14px] font-normal'>Login</div>
             </div>
@@ -124,10 +140,10 @@ function Header() {
           <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
           <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
           {showSubmenu && (
-            <div className="submenu absolute bg-white border z-50 border-[#D4D4D4]  w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-4">
+            <div className="submenu absolute bg-white border z-50 border-[#D4D4D4]  w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-12">
               {categories.length > 0 ? (
                 categories.map(category => (
-                  <div key={category.id} className="submenu-item p-2 hover:bg-gray-200 cursor-pointer">
+                  <div key={category.id} className="submenu-item p-2 hover:text-[#304ba0] hover:underline cursor-pointer">
                     {category.name}
                   </div>
                 ))
@@ -153,36 +169,41 @@ function Header() {
             />
             {activeCategory === category.id && (
               <div
-                className="fixed bg-white border z-50 border-[#D4D4D4] w-[898px] columns-5 text-black text-start font-semibold p-8"
-                style={{ left: '312px' }}
+                className="fixed bg-white border z-50 border-[#D4D4D4] w-[1020px] columns-5 gap-24 text-black text-start font-semibold p-8"
+                style={{ left: '312px', marginTop:'40px' }}
               >
                 {category.subCategories && category.subCategories.map((subcategory) => (
                   <div
                     key={subcategory.id}
-                    className="submenu-item p-2 cursor-pointer"
-                    onMouseEnter={() => handleSubcategoryMouseEnter(subcategory)}
+                    className="submenu-item p-2 cursor-pointer w-auto"
                   >
                     {subcategory.name}
-                    {activeSubcategory === subcategory.id && (
-                      <div className="absolute bg-white  z-50 border-[#D4D4D4] w-[200px] text-black text-start font-normal  ">
-                        <div>
-                          {subcategory.subSubCategories.map(subSubcategory => (
-                            <div className=' hover:text-[#304BA0]' key={subSubcategory.id}>
-                              {subSubcategory.name}
-                            </div>
-                          ))}
-                        </div>
+                    <div className="absolute bg-white z-50 border-[#D4D4D4] text-black text-start font-normal">
+                      <div>
+                        {subcategory.subSubCategories.map(subSubcategory => (
+                          <div className='hover:text-[#304BA0] w-36' key={subSubcategory.id}>
+                            {subSubcategory.name}
+                          </div>
+                        ))}
                       </div>
-                    )}
+                    </div>
                   </div>
                 ))}
               </div>
             )}
           </div>
         ))}
-
-
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-[#353533CC] backdrop-blur-sm bg-opacity-95">
+        <LogoutConfirmation
+          onConfirm={handleLogoutConfirm}
+          onClose={handleModalClose}
+        />
+        </div>
+      )}
+     
     </div>
   );
 }
