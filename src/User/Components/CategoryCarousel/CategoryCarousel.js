@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +11,7 @@ import CategoryImage4 from '../../../Assets/CategoryImage/Rectangle 203 (3).png'
 import CategoryImage5 from '../../../Assets/CategoryImage/Rectangle 203 (4).png'
 import CategoryImage6 from '../../../Assets/CategoryImage/Rectangle 203 (5).png'
 import './CategoryCarousel.css'
+import Api from '../../../Services/Api';
 
 
 const NextArrow = (props) => {
@@ -61,68 +62,16 @@ const settings = {
 
 function CategoryCarousel() {
 
-    const products = [
-        {
-            "product_id": 1,
-            "product_name": "Dermo Cosmetics",
-            "image_url": CategoryImage1,
-            "description": "A sleek and ergonomic wireless mouse with high precision and long battery life."
-        },
-        {
-            "product_id": 2,
-            "product_name": "Nutrition & Supplements",
-            "image_url": CategoryImage2,
-            "description": "Noise-cancelling Bluetooth headphones with superior sound quality and comfortable fit."
-        },
-        {
-            "product_id": 3,
-            "product_name": "Mother & Baby Care",
-            "image_url": CategoryImage3,
-            "description": "A versatile smart watch with fitness tracking, heart rate monitoring, and customizable watch faces."
-        },
-        {
-            "product_id": 4,
-            "product_name": "Personal Care",
-            "image_url": CategoryImage4,
-            "description": "A compact portable speaker with powerful sound and long-lasting battery for outdoor use."
-        },
-        {
-            "product_id": 5,
-            "product_name": "Medicines",
-            "image_url": CategoryImage5,
-            "description": "A high-capacity external hard drive with fast data transfer speeds and durable design."
-        },
-        {
-            "product_id": 6,
-            "product_name": "Home Health Care",
-            "image_url": CategoryImage6,
-            "description": "A sleek and ergonomic wireless mouse with high precision and long battery life."
-        },
-        {
-            "product_id": 7,
-            "product_name": "Nutrisious",
-            "image_url": CategoryImage1,
-            "description": "Noise-cancelling Bluetooth headphones with superior sound quality and comfortable fit."
-        },
-        {
-            "product_id": 8,
-            "product_name": "Beauty Products",
-            "image_url": CategoryImage2,
-            "description": "A versatile smart watch with fitness tracking, heart rate monitoring, and customizable watch faces."
-        },
-        {
-            "product_id": 9,
-            "product_name": "Pocket products",
-            "image_url": CategoryImage3,
-            "description": "A compact portable speaker with powerful sound and long-lasting battery for outdoor use."
-        },
-        {
-            "product_id": 10,
-            "product_name": "Medical equipments",
-            "image_url": CategoryImage4,
-            "description": "A high-capacity external hard drive with fast data transfer speeds and durable design."
-        }
-    ];
+    const [categories, setCategories] = useState([])
+
+   
+    useEffect(() => {
+        Api.get('categories')
+        .then(response => {
+            console.log(response.data.data,'cccccc')
+            setCategories(response.data.data)
+        })
+    },[])
 
     return (
         <div className=' w-[1200px] mx-auto pt-[64px]'>
@@ -132,13 +81,13 @@ function CategoryCarousel() {
             <div className='pt-[48px]'>
 
                 <Slider {...settings}>
-                    {products.map((product) => (
-                        <div className='categoryCard text-black rounded-lg border cursor-pointer' key={product.id}>
+                    {categories.map((category) => (
+                        <div className='categoryCard text-black rounded-lg border cursor-pointer' key={category.id}>
                             <div className=' flex justify-center items-center'>
-                                <img src={product.image_url} className='h-[151px] w-[164px] mt-[8px] rounded-lg' alt={product.product_name} />
+                                <img src={category.image_url} className='h-[151px] w-[164px] mt-[8px] rounded-lg' alt={category.name} />
                             </div>
                             <div className='flex flex-col justify-center items-center gap-4 p-4'>
-                                <p className='text-[16px] font-medium leading-[20px]'>{product.product_name}</p>
+                                <p className='text-[16px] font-medium leading-[20px]'>{category.name}</p>
                                 {/* <p>{product.description}</p> */}
                                 {/* <button className='bg-yellow-300 text-white text-lg px-6 py-1 rounded-xl'>Read more</button> */}
                             </div>

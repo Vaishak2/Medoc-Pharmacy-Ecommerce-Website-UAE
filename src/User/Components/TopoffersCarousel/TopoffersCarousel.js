@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +11,7 @@ import TopOfferImg4 from '../../../Assets/Topoffers Images/Rectangle 203 (9).png
 import TopOfferImg5 from '../../../Assets/Topoffers Images/Rectangle 203 (10).png'
 import TopOfferImg6 from '../../../Assets/Topoffers Images/Rectangle 203 (11).png'
 import './TopoffersCarousel.css'
+import Api from '../../../Services/Api';
 
 
 const NextArrow = (props) => {
@@ -60,6 +61,8 @@ const settings = {
 };
 
 function TopoffersCarousel() {
+
+    const [topOffers, setTopOffers] = useState([])
 
     const products = [
         {
@@ -124,6 +127,14 @@ function TopoffersCarousel() {
         }
     ];
 
+    useEffect(() => {
+        Api.get('offers')
+        .then(response => {
+            console.log(response.data.data,'ttttt')
+            setTopOffers(response.data.data)
+        })
+    },[])
+
     return (
         <div className=' w-[1200px] mx-auto pt-[64px]'>
 
@@ -132,17 +143,17 @@ function TopoffersCarousel() {
             <div className='pt-[48px]'>
 
                 <Slider {...settings}>
-                    {products.map((product) => (
-                        <div className='topoffersCard text-black rounded-lg border border-[#D4D4D4] cursor-pointer' key={product.id}>
+                    {topOffers.map((topOffer) => (
+                        <div className='topoffersCard text-black rounded-lg border border-[#D4D4D4] cursor-pointer' key={topOffer.id}>
 
                             <div className=' flex flex-col justify-center items-center h-[72px] p-4'>
-                                <p className='text-[16px] font-medium leading-[20px]'>{product.product_name}</p>
+                                <p className='text-[16px] font-medium leading-[20px]'>{topOffer.name}</p>
                                 {/* <p>{product.description}</p> */}
                                 {/* <button className='bg-yellow-300 text-white text-lg px-6 py-1 rounded-xl'>Read more</button> */}
                             </div>
 
                             <div className=' flex justify-center items-center'>
-                                <img src={product.image_url} className='h-[151px] w-[164px] rounded' alt={product.product_name} />
+                                <img src={topOffer.image_url} className='h-[151px] w-[164px] rounded' alt={topOffer.name} />
                             </div>
 
                             <div className='flex justify-center items-center sm:pt-[8px]'>

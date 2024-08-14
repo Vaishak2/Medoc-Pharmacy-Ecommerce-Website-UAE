@@ -29,8 +29,7 @@ function DeleteAccountReason() {
 
   const handleDeleteAccount = () => {
     if (selectedReasons.length === 0) {
-      setError('Please se
-               lect at least one reason before proceeding.');
+      setError('Please select at least one reason before proceeding.');
     } else {
       // Proceed with account deletion logic
       setIsDelete(!isDelete)
