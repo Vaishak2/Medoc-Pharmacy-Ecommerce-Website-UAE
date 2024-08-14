@@ -64,7 +64,6 @@ function CategoryCarousel() {
 
     const [categories, setCategories] = useState([])
 
-   
     useEffect(() => {
         Api.get('categories')
         .then(response => {
