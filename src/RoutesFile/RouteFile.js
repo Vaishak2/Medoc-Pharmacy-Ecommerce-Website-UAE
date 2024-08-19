@@ -8,6 +8,7 @@ import ProductDetailsPage from '../User/Pages/ProductDetailsPage/ProductDetailsP
 import CartPage from '../User/Pages/CartPage/CartPage'
 import MyAccountPage from '../User/Pages/MyAccountPage/MyAccountPage'
 import LoginPage from '../User/Pages/LoginPage/LoginPage'
+import PDPReviewDetailedPage from '../User/Pages/PDPReviewDetailedPage/PDPReviewDetailedPage'
 
 function RouteFile() {
     return (
@@ -23,6 +24,7 @@ function RouteFile() {
                     <Route path='cart' element={<CartPage/>}/>
                     <Route path='myaccount' element={<MyAccountPage/>}/>
                     <Route path='LoginPage' element={<LoginPage/>}/>
+                    <Route path='detailedReviews' element={<PDPReviewDetailedPage/>}/>
 
                 </Route>
                 
