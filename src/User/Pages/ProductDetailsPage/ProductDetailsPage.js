@@ -18,8 +18,8 @@ function ProductDetailsPage() {
       <PDPMainComponent />
       <PDPDetailsComponent />
 
-      <PDPFrequentlyBoughtTogether/>
-   <RecentlyviewedCarousel />
+      <PDPFrequentlyBoughtTogether />
+      <RecentlyviewedCarousel />
       <SimilarProducts />
 
       <PDPProductPolicy />
