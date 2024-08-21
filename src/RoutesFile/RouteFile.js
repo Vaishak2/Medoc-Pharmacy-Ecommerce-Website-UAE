@@ -27,6 +27,8 @@ function RouteFile() {
                     <Route path='detailedReviews' element={<PDPReviewDetailedPage/>}/>
 
                 </Route>
+
+                <Route path='/userLogin' element={<LoginPage/>}/>
                 
 
 

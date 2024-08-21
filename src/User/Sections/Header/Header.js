@@ -8,6 +8,7 @@ import AccountCircle from "../../../Assets/Icons/account_circle.png";
 import Menu from "../../../Assets/Icons/menu.png";
 import DropDownArrow from "../../../Assets/Icons/chevron_forward.png";
 import LogoutConfirmation from '../../Components/LogoutConfirmation/LogoutConfirmation';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -124,9 +125,9 @@ function Header() {
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" />
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Cart} alt="Cart" />
             </div>
-            <div className='login-section flex cursor-pointer ml-[24px]' onClick={handleLoginClick}>
+            <div className='login-section flex cursor-pointer ml-[24px]'>
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px]' src={AccountCircle} alt="Account" />
-              <div className='text-center justify-center mt-[24px] sm:ml-[8px] text-[14px] font-normal'>Login</div>
+              <Link to={'/userLogin'}><div className='text-center justify-center mt-[24px] sm:ml-[8px] text-[14px] font-normal'>Login</div></Link>
             </div>
           </div>
         </div>
