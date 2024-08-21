@@ -7,7 +7,7 @@ import AdButton2 from "../../../Assets/Ad Image/Frame 553 (1).png"
 
 function AdPage() {
     return (
-        <div className='sm:w-[1200px] sm:h-[307px] mt-[64px] flex sm:ml-[120px] '>
+        <div className='sm:w-[1200px] sm:h-[307px] mt-[64px] flex sm:mx-auto '>
             <div 
                 className='sm:w-[588px] sm:h-[307px] bg-AdBnner bg-cover'>
                  <img className='sm:w-[118px] sm:h-[40px] sm:mt-[227px] sm:ml-[32px] ' src={AdButton1} alt="" />

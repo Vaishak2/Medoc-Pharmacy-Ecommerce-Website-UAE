@@ -80,8 +80,8 @@ function Header() {
     setIsModalOpen(false);
   };
   return (
-    <div className='main-container sm:w-[1440px] mx-auto sticky top-0 z-50 bg-white'>
-      <div className='sm:w-[1440px]'>
+    <div className='main-container  mx-auto sticky top-0 z-50 bg-white'>
+      <div className='mx-auto'>
         <div className='logo-section sm:h-[71px] mt-[16px] sm:mx-[120px] justify-between gap-1 sm:flex'>
           <div>
             <div className='logo'>
@@ -132,7 +132,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className='flex sm:w-[1440px] justify-center sm:h-[72px] sm:mt-[17px] border-t border-b border-#EAEAEA gap-1'>
+      <div className='flex  justify-center sm:h-[72px] sm:mt-[17px] border-t border-b border-#EAEAEA gap-1'>
         <div
           className="category sm:w-[170px] sm:h-[40px] border-[1px] border-[#D4D4D4] rounded-[8px] flex sm:my-auto relative"
           onMouseEnter={handleMouseEnter}
