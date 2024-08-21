@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginImage from "../../../Assets/LoginImage/LoginImage.png";
 import Checked from "../../../Assets/Icons/checkBox.svg";
 import UnChecked from "../../../Assets/Icons/UnCheckedBox.svg";
 import Mail from "../../../Assets/Icons/mail.svg";
-import UAEFlag from "../../../Assets/LoginImage/UAEFlag.png"
+import UAEFlag from "../../../Assets/LoginImage/UAEFlag.png";
 
 function LoginWithPhone() {
   const [isChecked, setIsChecked] = useState(true);
@@ -38,14 +38,24 @@ function LoginWithPhone() {
     }
   };
 
+  useEffect(() => {
+    // Disable scrolling on the body element
+    document.body.style.overflow = 'hidden';
+
+    // Clean up: Re-enable scrolling when the component unmounts
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
-    <div className='flex justify-between'>
-      <div className='sm:w-[708px] sm:h-[1024px]'>
-        <img src={LoginImage} alt="Login" />
+    <div className='flex min-h-screen overflow-hidden'>
+      <div className='w-1/2 h-screen'>
+        <img src={LoginImage} className="h-full w-full object-cover" alt="Login" />
       </div>
 
-      <div className="sm:w-[708px] sm:h-[1024px] items-center justify-center bg-white">
-        <h2 className="text-[32px] font-medium mb-6 text-center sm:mt-[208px]">Login</h2>
+      <div className="w-1/2 h-screen flex flex-col justify-center items-center bg-white">
+        <h2 className="text-[32px] font-medium mb-6 text-center">Login</h2>
         <p className="text-center text-[16px] leading-[26px] text-[#636363] font-normal sm:w-[486px] sm:h-[48px] mx-auto mb-4">
           Get access to your orders, Track previous orders, Book an appointment
         </p>
