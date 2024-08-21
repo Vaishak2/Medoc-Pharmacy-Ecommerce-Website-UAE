@@ -127,7 +127,7 @@ function CartItem() {
   };
 
   return (
-    <div className={`cart-section flex ml-[120px] ${isCartChooseOpen || isRemoveModalOpen ? 'blur-background' : ''}`}>
+    <div className={`cart-section flex mx-auto w-fit gap-6 ${isCartChooseOpen || isRemoveModalOpen ? 'blur-background' : ''}`}>
       <div className="cart-first-section sm:mt-16">
         <h1 className="sm:text-[18px] sm:leading-6 font-semibold text-start">
           Cart <span className="font-normal">({items.length} items)</span>
@@ -191,7 +191,7 @@ function CartItem() {
           </div>
         ))}
       </div>
-      <div className="coupon-price-section sm:mt-[138px] sm:ml-6">
+      <div className="coupon-price-section sm:mt-[138px]">
         <div className="coupon sm:w-[384px] sm:h-[128px] rounded-lg border p-4 ">
           <div className='sm:text-[16px] sm:leading-6 font-semibold text-start'>Coupons</div>
           <img className='sm:mt-4' src={Coupons} alt="Coupons" />
