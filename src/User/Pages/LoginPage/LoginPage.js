@@ -1,14 +1,12 @@
 import React from 'react'
-import LoginUsing from '../../Components/Login-Using/LoginUsing'
-import LoginWithPhone from '../../Components/LoginWithPhone/LoginWithPhone'
 import LoginOTPpage from '../../Components/LoginOTPpage/LoginOTPpage'
+import LoginWithEmail from '../../Components/LoginWithEmail/LoginWithEmail'
+import LoginWithPhone from '../../Components/LoginWithPhone/LoginWithPhone'
 
 function LoginPage() {
   return (
     <div>
-      <LoginUsing/>
       <LoginWithPhone/>
-      <LoginOTPpage/>
     </div>
   )
 }

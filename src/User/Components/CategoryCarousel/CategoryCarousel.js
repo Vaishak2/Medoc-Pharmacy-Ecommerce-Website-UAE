@@ -73,6 +73,7 @@ function CategoryCarousel() {
     },[])
 
     return (
+        
         <div className=' w-[1200px] mx-auto pt-[64px]'>
 
             <div className='text-[32px] leading-[24px]  font-medium text-black text-left'>Shop By Category</div>
@@ -95,6 +96,7 @@ function CategoryCarousel() {
                 </Slider>
             </div>
         </div>
+        
     )
 }
 

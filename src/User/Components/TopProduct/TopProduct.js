@@ -141,8 +141,8 @@ function TopProduct() {
               </div>
               <div className='sm:w-[281px] sm:h-[128] '>
                 <div className='flex sm:text-start sm:text-[16px] sm:leading-[28px] '>
-                  <h1 className='line-through text-[#A8A8A8]'>{product.beforeprice}</h1>
-                  <h1 className='ml-[8px] text-[#0FB015]'>{product.price} </h1>
+                  <h1 className='line-through text-[#A8A8A8]'>{product.price}</h1>
+                  <h1 className='ml-[8px] text-[#0FB015]'>30% OFF </h1>
                 </div>
                 <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.price} </h1>
                 <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
