@@ -4,21 +4,28 @@ import Checked from "../../../Assets/Icons/checkBox.svg";
 import UnChecked from "../../../Assets/Icons/UnCheckedBox.svg";
 import Mail from "../../../Assets/Icons/mail.svg";
 import UAEFlag from "../../../Assets/LoginImage/UAEFlag.png";
+import Api from '../../../Services/Api';
+import { useNavigate } from 'react-router-dom';
 
 function LoginWithPhone() {
   const [isChecked, setIsChecked] = useState(true);
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({ phone: "", checkbox: "" });
+  const [userToken, setUserToken] = useState('')
+
+  const navigate = useNavigate()
+
+  
 
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
   };
 
   const validatePhone = () => {
-    const phoneRegex = /^\+971\d{9}$/;
+    const phoneRegex = /^[0-9]{10}$/;
     if (!phone) {
       return "Phone number is required.";
-    } else if (!phoneRegex.test(`+971${phone}`)) {
+    } else if (!phoneRegex.test(phone)) {
       return "Phone number is invalid.";
     }
     return "";
@@ -35,6 +42,16 @@ function LoginWithPhone() {
       setErrors({ phone: "", checkbox: "" });
       // Proceed with form submission
       console.log("Form submitted");
+      Api.post('auth/login', {
+        "phoneNumber": phone,
+        "email": ""
+      })
+      .then(response => {
+        console.log(response.data.token)
+        setUserToken(response.data.token)
+        localStorage.setItem("userToken",response.data.token)
+        navigate(-1)
+      })
     }
   };
 
@@ -50,8 +67,13 @@ function LoginWithPhone() {
 
   return (
     <div className='flex min-h-screen overflow-hidden'>
-      <div className='w-1/2 h-screen'>
-        <img src={LoginImage} className="h-full w-full object-cover" alt="Login" />
+      <div className='w-1/2 h-screen bg-Login-Background bg-cover'>
+        {/* <img src={LoginImage} className="h-full w-full object-cover" alt="Login" /> */}
+        <div className='text-left w-fit mx-auto mt-[75%]'>
+          <div className='sm:text-[26px] font-thin'>Your Health, Delivered:</div>
+          <div className='text-[#304BA0] sm:text-[32px] font-semibold sm:mt-2'>TRUSTED MEDICAL</div>
+          <div className='sm:text-[32px]'><span className='text-[#304BA0] font-semibold'>SUPPLIES </span><span>AT YOUR FINGERTIPS</span></div>
+        </div>
       </div>
 
       <div className="w-1/2 h-screen flex flex-col justify-center items-center bg-white">
