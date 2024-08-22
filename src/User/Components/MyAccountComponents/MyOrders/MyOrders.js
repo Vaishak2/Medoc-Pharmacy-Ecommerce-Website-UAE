@@ -109,12 +109,10 @@ function MyOrders() {
             {/* Modal Rendering */}
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                    <div className="relative bg-white p-4 rounded-lg max-w-lg mx-auto">
-                        <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onClick={closeModal}>
-                            <img className='w-6 h-6' src={Close} alt="Close" />
-                        </button>
-                        <ReviewForm />
-                    </div>
+                 
+                        
+                        <ReviewForm  closeModal={closeModal}/>
+                 
                 </div>
             )}
         </div>

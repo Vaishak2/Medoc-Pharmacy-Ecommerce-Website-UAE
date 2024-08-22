@@ -3,7 +3,7 @@ import Add_photo from "../../../Assets/Icons/add_a_photo.svg";
 import ProductImg from "../../../Assets/Top Product image/pngwing.com (14) 1.png";
 import Close from "../../../Assets/Icons/close.png";
 
-const ReviewForm = () => {
+const ReviewForm = ({closeModal}) => {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState('');
   const [review, setReview] = useState('');
@@ -33,13 +33,13 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl border p-10 text-justify max-w-md mx-auto">
-      <div className="flex items-center mb-4">
+    <div className="bg-white rounded-xl border p-10 text-justify w-[476px] mx-auto">
+      <div className="flex items-center border-b pb-6 mb-4">
         <img src={ProductImg} alt="Product" className="w-12 h-12 object-cover rounded mr-4" />
-        <div>
+        <div className=''>
           <h2 className="font-medium text-justify sm:w-[213px] text-sm">Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet</h2>
         </div>
-        <button className="ml-auto text-gray-500 hover:text-gray-800">
+        <button className="ml-auto text-gray-500 hover:text-gray-800" onClick={closeModal}>
          <img className='w-6 h-6 ' src={Close} alt="Close" />
         </button>
       </div>
