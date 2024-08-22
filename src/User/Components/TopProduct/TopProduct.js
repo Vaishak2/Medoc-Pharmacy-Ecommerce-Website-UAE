@@ -18,82 +18,7 @@ function TopProduct() {
     setFavorite(newFavorite);
   };
 
-  const productList = [
-    {
-      "id": 1,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-      "id": 2,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-      "id": 3,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-      "id": 4,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-       "id": 1,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-      "id": 2,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-      "id": 3,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
-    {
-      "id": 4,
-      "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-      "image": ProductImage,
-      "rating": "3.5",
-      "price": "AED 600",
-      "discount": "30% OFF",
-      "offerPrice": "AED 405"
-    },
   
-
-  ]
 
   const userId = '1';
   const pageNumber = '1'
@@ -145,11 +70,10 @@ function TopProduct() {
                   <h1 className='ml-[8px] text-[#0FB015]'>30% OFF </h1>
                 </div>
                 <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.price} </h1>
-                <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
 
+                <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
                   <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
                   <div className='text-white ml-[42px] mt-[-23px]  '>Add To Cart</div>
-
                 </div>
 
               </div>
