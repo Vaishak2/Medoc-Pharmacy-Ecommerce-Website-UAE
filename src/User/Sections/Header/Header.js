@@ -21,6 +21,8 @@ function Header() {
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
+  const userToken = localStorage.getItem("userToken")
+
   useEffect(() => {
     axios.get('http://194.238.23.134:3000/api/categories')
       .then(response => {
@@ -127,7 +129,9 @@ function Header() {
             </div>
             <div className='login-section flex cursor-pointer ml-[24px]'>
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px]' src={AccountCircle} alt="Account" />
-              <Link to={'/userLogin'}><div className='text-center justify-center mt-[24px] sm:ml-[8px] text-[14px] font-normal'>Login</div></Link>
+              {userToken ? null :
+                <Link to={'/userLogin'}><div className='text-center justify-center mt-[24px] sm:ml-[8px] text-[14px] font-normal'>Login</div></Link>
+              }
             </div>
           </div>
         </div>
@@ -154,7 +158,7 @@ function Header() {
             </div>
           )}
         </div>
-       
+
         {categories && categories.map((category) => (
           <div
             key={category.id}
@@ -171,7 +175,7 @@ function Header() {
             {activeCategory === category.id && (
               <div
                 className="fixed bg-white border z-50 border-[#D4D4D4] w-[1020px] columns-5 gap-24 text-black text-start font-semibold p-8"
-                style={{ left: '312px', marginTop:'40px' }}
+                style={{ left: '312px', marginTop: '40px' }}
               >
                 {category.subCategories && category.subCategories.map((subcategory) => (
                   <div
@@ -198,13 +202,13 @@ function Header() {
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#353533CC] backdrop-blur-sm bg-opacity-95">
-        <LogoutConfirmation
-          onConfirm={handleLogoutConfirm}
-          onClose={handleModalClose}
-        />
+          <LogoutConfirmation
+            onConfirm={handleLogoutConfirm}
+            onClose={handleModalClose}
+          />
         </div>
       )}
-     
+
     </div>
   );
 }

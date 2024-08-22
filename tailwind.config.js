@@ -9,6 +9,7 @@ module.exports = {
         'Home-banner-image2':"url('/src/Assets/Banner images/Rectangle 245.png')",
         'AdBnner':"url('/src/Assets/Ad Image/Column add 1 (1).png')",
         'AdBnner2':"url('/src/Assets/Ad Image/Column add 2.png')",
+        'Login-Background':"url('/src/Assets/LoginImage/LoginBackground.png')",
       }),
 
       fontFamily: {
