@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import axios from 'axios';
 import Logo from "../../../Assets/Logos/MedopharmaLogo.png";
 import SearchIcon from "../../../Assets/Icons/search.png";
@@ -20,8 +20,13 @@ function Header() {
   const [subSubcategories, setSubSubcategories] = useState([]);
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [isAccountDropdownOpen,setIsAccountDropdownOpen]= useState(false)
+  
+
 
   const userToken = localStorage.getItem("userToken")
+
+  const dropdownRef = useRef(null)
 
   useEffect(() => {
     axios.get('http://194.238.23.134:3000/api/categories')
@@ -33,6 +38,22 @@ function Header() {
         console.log("NOT WORKING");
       });
   }, []);
+  useEffect(() => {
+    // Function to handle clicks outside the dropdown
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsAccountDropdownOpen(false);
+      }
+    };
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Unbind the event listener on cleanup
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   const handleMouseEnter = () => {
     setShowSubmenu(true);
@@ -81,6 +102,9 @@ function Header() {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+ const toggleAccountDropdown =()=>{
+  setIsAccountDropdownOpen(!isAccountDropdownOpen)
+ } 
   return (
     <div className='main-container  mx-auto sticky top-0 z-50 bg-white'>
       <div className='mx-auto'>
@@ -127,11 +151,35 @@ function Header() {
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" />
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Cart} alt="Cart" />
             </div>
-            <div className='login-section flex cursor-pointer ml-[24px]'>
+            <div className='login-section flex cursor-pointer ml-[24px] relative' onClick={toggleAccountDropdown}>
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px]' src={AccountCircle} alt="Account" />
               {userToken ? null :
                 <Link to={'/userLogin'}><div className='text-center justify-center mt-[24px] sm:ml-[8px] text-[14px] font-normal'>Login</div></Link>
               }
+              {isAccountDropdownOpen && (
+                <ul ref={dropdownRef} className="absolute right-0 mt-[89px] bg-white rounded-lg p-4 sm:w-[224px] sm:h-[276px] shadow-lg text-justify text-sm z-50">
+               
+                  <li className="px-4 py-2 cursor-pointer sm:font-medium hover:font-medium border-b">
+                    <Link to="/about">Hello User...!</Link>
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium">
+                    <Link to="/about">My orders</Link>
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium">
+                    <Link to="/about">My wishlist</Link>
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium border-b">
+                    <Link to="/about">Saved address</Link>
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium">
+                    <Link to="/about">Need help !</Link>
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium">
+                    <Link to="/about">About</Link>
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium" onClick={handleLoginClick}>Logout</li>
+                </ul>
+              )}
             </div>
           </div>
         </div>
@@ -174,13 +222,13 @@ function Header() {
             />
             {activeCategory === category.id && (
               <div
-                className="fixed bg-white border z-50 border-[#D4D4D4] w-[1020px] columns-5 gap-24 text-black text-start font-semibold p-8"
+                className="fixed bg-white border z-50 border-[#D4D4D4] w-[1100px] h-[432px] columns-5 gap-24 text-black text-start font-semibold p-8"
                 style={{ left: '312px', marginTop: '40px' }}
               >
                 {category.subCategories && category.subCategories.map((subcategory) => (
                   <div
                     key={subcategory.id}
-                    className="submenu-item p-2 cursor-pointer w-auto"
+                    className="submenu-item p-4 cursor-pointer w-auto"
                   >
                     {subcategory.name}
                     <div className="absolute bg-white z-50 border-[#D4D4D4] text-black text-start font-normal">
