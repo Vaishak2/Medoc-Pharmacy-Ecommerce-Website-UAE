@@ -112,7 +112,7 @@ function Header() {
         <div className='logo-section sm:h-[71px] mt-[16px] sm:mx-[120px] justify-between gap-1 sm:flex'>
           <div>
             <div className='logo'>
-              <img className='sm:w-[86px] sm:h-[71px] cursor-pointer' src={Logo} alt="Logo" />
+             <Link to ={"/"}> <img className='sm:w-[86px] sm:h-[71px] cursor-pointer' src={Logo} alt="Logo" /></Link>
             </div>
           </div>
           <div className='search-bar sm:w-[512px] sm:h-[56px] border border-opacity-5 border-[#EBEBEB] rounded-[15px] bg-[#F9F9F9] sm:mt-[8px] sm:ml-[32px] sm:flex'>
