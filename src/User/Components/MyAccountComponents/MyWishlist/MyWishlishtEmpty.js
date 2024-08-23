@@ -13,7 +13,7 @@ function MyWishlishtEmpty() {
         Nothing is in your wishlist
         </div>
         <div className='text-[#A8A8A8] sm:text-sm sm:font-normal mt-4'>Add items to your wishlist as you browse and they will magically appears here</div>
-        <div className='sm:w-[181px] bg-[#304BA0] rounded-lg text-[#ffff] sm:font-medium px-8 py-5 sm:text-[14px] leading-4 mt-6 mx-auto  '>Add Items</div>
+        <div className='sm:w-[181px] bg-[#304BA0] hover:bg-[#3E5FC5] rounded-lg text-[#ffff] sm:font-medium px-8 py-5 sm:text-[14px] leading-4 mt-6 mx-auto  '>Add Items</div>
       </div>
     </div>
   

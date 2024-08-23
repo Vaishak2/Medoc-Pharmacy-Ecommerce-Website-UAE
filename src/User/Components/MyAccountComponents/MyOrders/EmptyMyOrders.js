@@ -14,7 +14,7 @@ function EmptyMyOrders() {
         </div>
         <div className='text-[#A8A8A8] sm:text-sm sm:font-normal mt-4'>Have you not placed on order yet. Please add
         items to your cart and checkout</div>
-        <div className='sm:w-[181px] bg-[#304BA0] rounded-lg text-[#ffff] sm:font-medium px-8 py-5 sm:text-[14px] leading-4 mt-6 mx-auto  '>Explore Products</div>
+        <div className='sm:w-[181px] bg-[#304BA0] hover:bg-[#3E5FC5] rounded-lg text-[#ffff] sm:font-medium px-8 py-5 sm:text-[14px] leading-4 mt-6 mx-auto  '>Explore Products</div>
       </div>
     </div>
   )
