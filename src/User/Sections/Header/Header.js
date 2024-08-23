@@ -193,7 +193,7 @@ function Header() {
           <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
           <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
           {showSubmenu && (
-            <div className="submenu absolute bg-white border z-50 border-[#D4D4D4]  w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-12">
+            <div className="submenu absolute bg-white shadow-lg z-50 border-[#D4D4D4] h-[432px]  w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-[54px]">
               {categories.length > 0 ? (
                 categories.map(category => (
                   <div key={category.id} className="submenu-item p-2 hover:text-[#304ba0] hover:underline cursor-pointer">
@@ -222,8 +222,8 @@ function Header() {
             />
             {activeCategory === category.id && (
               <div
-                className="fixed bg-white border z-50 border-[#D4D4D4] w-[1100px] h-[432px] columns-5 gap-24 text-black text-start font-semibold p-8"
-                style={{ left: '312px', marginTop: '40px' }}
+                className="fixed bg-white shadow-lg z-40 border-[#D4D4D4] w-[1100px] h-[432px] columns-5 gap-24 text-black text-start font-semibold p-8"
+                style={{ left: '312px', marginTop: '26px' }}
               >
                 {category.subCategories && category.subCategories.map((subcategory) => (
                   <div
@@ -231,10 +231,10 @@ function Header() {
                     className="submenu-item p-4 cursor-pointer w-auto"
                   >
                     {subcategory.name}
-                    <div className="absolute bg-white z-50 border-[#D4D4D4] text-black text-start font-normal">
+                    <div className="absolute bg-white z-50 border-[#D4D4D4]  text-black text-start font-normal">
                       <div>
                         {subcategory.subSubCategories.map(subSubcategory => (
-                          <div className='hover:text-[#304BA0] w-36' key={subSubcategory.id}>
+                          <div className='hover:text-[#304BA0] py-6 w-36' key={subSubcategory.id}>
                             {subSubcategory.name}
                           </div>
                         ))}
