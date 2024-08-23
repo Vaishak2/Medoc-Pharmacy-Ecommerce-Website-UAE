@@ -148,9 +148,9 @@ function Header() {
               )}
               <img onClick={handleDropdownToggle} className='sm:w-[16px] sm:h-[9px] sm:ml-[7px] sm:my-auto' src={DropDownArrow} alt="Arrow" />
             </div>
-            <div className='cart-fav sm:flex justify-center sm:ml-[24px]'>
-              <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" />
-              <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Cart} alt="Cart" />
+            <div className='cart-fav sm:flex justify-center gap-6 sm:ml-[24px]'>
+              <div className=''><Link to={'myaccount'}><img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" /></Link></div>
+              <div className=''><Link to={'cart'}><img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Cart} alt="Cart" /></Link></div>
             </div>
             <div className='login-section flex cursor-pointer ml-[24px] relative' onClick={toggleAccountDropdown}>
               <img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px]' src={AccountCircle} alt="Account" />
@@ -164,13 +164,13 @@ function Header() {
                     <Link to="/about">Hello User...!</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
-                    <Link to="/about">My orders</Link>
+                    <Link to="myaccount">My orders</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
-                    <Link to="/about">My wishlist</Link>
+                    <Link to="myaccount">My wishlist</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium border-b">
-                    <Link to="/about">Saved address</Link>
+                    <Link to="myaccount">Saved address</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
                     <Link to="/about">Need help !</Link>
