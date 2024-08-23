@@ -9,10 +9,13 @@ import CategoryBanner from '../../Components/CategoryBannerPage/CategoryBanner'
 
 import CategoryAdPage from '../../Components/CategoryAdPage/CategoryAdPage'
 import CategoryThisWeekPage from '../../Components/CategoryThisWeekPicks/CategoryThisWeekPage'
+import { useParams } from 'react-router-dom'
 
 
 
 function CategoryPage() {
+  const {categoryId} = useParams()
+
   return (
     <div>
       <CategoryPageBreadcrumb />

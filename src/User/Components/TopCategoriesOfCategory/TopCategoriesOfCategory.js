@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './TopCategoriesOfCategory.css'
 import SubCategoryImg1 from '../../../Assets/Subcategory images/Rectangle 203 (12).png'
 import SubCategoryImg2 from '../../../Assets/Subcategory images/Rectangle 203 (13).png'
@@ -12,9 +12,15 @@ import SubCategoryImg9 from '../../../Assets/Subcategory images/Rectangle 203 (2
 import SubCategoryImg10 from '../../../Assets/Subcategory images/Rectangle 203 (21).png'
 import SubCategoryImg11 from '../../../Assets/Subcategory images/Rectangle 203 (22).png'
 import SubCategoryImg12 from '../../../Assets/Subcategory images/Rectangle 203 (23).png'
+import { useParams } from 'react-router-dom'
+import Api from '../../../Services/Api'
 
 
 function TopCategoriesOfCategory() {
+    const {categoryId} = useParams()
+
+    const [categories, setCategories] = useState([])
+   
 
     const products = [
         {
@@ -91,9 +97,19 @@ function TopCategoriesOfCategory() {
         }
     ];
 
+    useEffect(() => {
+        Api.get('categories')
+        .then(response => {
+            console.log(response.data.data,'catttteeeee')
+            setCategories(response.data.data)
+            
+            console.log(categories.filter((category)=>category.id===categoryId),'mqinCategry')
+        })
+    },[])
+
     return (
         <div className=' w-[1200px] mx-auto pt-[64px]'>
-
+            
             <div className='text-[32px] leading-[24px]  font-medium text-black text-left'>Top categories of Dermo Cosmetics</div>
 
             <div className='pt-[24px]'>

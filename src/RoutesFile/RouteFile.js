@@ -18,7 +18,7 @@ function RouteFile() {
 
                     <Route index element={<HomePage/>}/>
                     <Route path='home' element={<HomePage/>}/>
-                    <Route path='category' element={<CategoryPage/>}/>
+                    <Route path='category/:id' element={<CategoryPage/>}/>
                     <Route path='products' element={<ProductListingPage/>}/>
                     <Route path='productDetails' element={<ProductDetailsPage/>}/>
                     <Route path='cart' element={<CartPage/>}/>
