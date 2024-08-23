@@ -9,7 +9,7 @@ function MyWishlishtEmpty() {
         <div className='sm:w-16 sm:h-16 bg-[#EDF1FF] rounded-full py-4 mx-auto'>
   <img className='justify-center m-auto' src={NoWishlist} alt="" />
         </div>
-        <div className='sm:text-[18px] sm:font-medium sm:leading-[20px]'>
+        <div className='sm:text-[18px] sm:font-medium sm:leading-[20px] mt-6'>
         Nothing is in your wishlist
         </div>
         <div className='text-[#A8A8A8] sm:text-sm sm:font-normal mt-4'>Add items to your wishlist as you browse and they will magically appears here</div>
