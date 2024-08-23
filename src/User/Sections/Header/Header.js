@@ -97,6 +97,7 @@ function Header() {
     setIsModalOpen(false);
     // Add your logout logic here
     console.log("User logged out");
+    localStorage.removeItem("userToken")
   };
 
   const handleModalClose = () => {
@@ -177,7 +178,9 @@ function Header() {
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
                     <Link to="/about">About</Link>
                   </li>
-                  <li className="px-4 py-2 cursor-pointer hover:font-medium" onClick={handleLoginClick}>Logout</li>
+                  {userToken ?
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium" onClick={handleLoginClick}>Logout</li> : null
+                  }
                 </ul>
               )}
             </div>

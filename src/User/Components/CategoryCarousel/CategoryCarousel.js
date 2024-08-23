@@ -12,6 +12,7 @@ import CategoryImage5 from '../../../Assets/CategoryImage/Rectangle 203 (4).png'
 import CategoryImage6 from '../../../Assets/CategoryImage/Rectangle 203 (5).png'
 import './CategoryCarousel.css'
 import Api from '../../../Services/Api';
+import { Link } from 'react-router-dom';
 
 
 const NextArrow = (props) => {
@@ -66,14 +67,13 @@ function CategoryCarousel() {
 
     useEffect(() => {
         Api.get('categories')
-        .then(response => {
-            console.log(response.data.data,'cccccc')
-            setCategories(response.data.data)
-        })
-    },[])
+            .then(response => {
+                setCategories(response.data.data)
+            })
+    }, [])
 
     return (
-        
+
         <div className=' w-[1200px] mx-auto pt-[64px]'>
 
             <div className='text-[32px] leading-[24px]  font-medium text-black text-left'>Shop By Category</div>
@@ -82,21 +82,25 @@ function CategoryCarousel() {
 
                 <Slider {...settings}>
                     {categories.map((category) => (
+
                         <div className='categoryCard text-black rounded-lg border cursor-pointer' key={category.id}>
-                            <div className=' flex justify-center items-center'>
-                                <img src={category.image_url} className='h-[151px] w-[164px] mt-[8px] rounded-lg' alt={category.name} />
-                            </div>
-                            <div className='flex flex-col justify-center items-center gap-4 p-4'>
-                                <p className='text-[16px] font-medium leading-[20px]'>{category.name}</p>
-                                {/* <p>{product.description}</p> */}
-                                {/* <button className='bg-yellow-300 text-white text-lg px-6 py-1 rounded-xl'>Read more</button> */}
-                            </div>
+                            <Link to={`category/${category.id}`}>
+                                <div className=' flex justify-center items-center'>
+                                    <img src={category.image_url} className='h-[151px] w-[164px] mt-[8px] rounded-lg' alt={category.name} />
+                                </div>
+                                <div className='flex flex-col justify-center items-center gap-4 p-4'>
+                                    <p className='text-[16px] font-medium leading-[20px]'>{category.name}</p>
+                                    {/* <p>{product.description}</p> */}
+                                    {/* <button className='bg-yellow-300 text-white text-lg px-6 py-1 rounded-xl'>Read more</button> */}
+                                </div>
+                            </Link>
                         </div>
+
                     ))}
                 </Slider>
             </div>
         </div>
-        
+
     )
 }
 
