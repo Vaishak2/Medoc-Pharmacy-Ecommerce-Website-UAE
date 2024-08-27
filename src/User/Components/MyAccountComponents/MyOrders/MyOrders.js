@@ -6,6 +6,7 @@ import RatingStar from '../../../../Assets/Icons/star.png';
 import ReviewForm from "../../../Components/ReviewForm/ReviewForm"
 import Close from "../../../../Assets/Icons/close.png"
 import EmptyMyOrders from './EmptyMyOrders';
+import RateAndReview from './RateAndReview';
 
 function MyOrders() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -118,7 +119,8 @@ function MyOrders() {
         //     )}
         // </div>
 
-        <div><EmptyMyOrders/></div>
+        // <div><EmptyMyOrders/></div>
+        <div> <RateAndReview/> </div>
     );
 }
 
