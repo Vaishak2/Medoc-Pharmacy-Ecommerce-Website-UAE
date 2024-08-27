@@ -6,12 +6,9 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-
-    "rc-slider": "^10.6.2",
-
-    "axios": "^1.7.2",
+    "axios": "^1.7.5",
     "http-proxy-middleware": "^3.0.0",
-
+    "rc-slider": "^10.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.0",
@@ -27,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://194.238.23.134:3000",
+  "proxy": "https://www.medocpharm.com/api",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -49,6 +46,4 @@
   "devDependencies": {
     "tailwindcss": "^3.4.4"
   }
-
-
 }
