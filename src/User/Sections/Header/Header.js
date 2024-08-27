@@ -188,27 +188,27 @@ function Header() {
         </div>
       </div>
       <div className='flex  justify-center sm:h-[72px] sm:mt-[17px] border-t border-b border-#EAEAEA gap-1'>
-        <div
-          className="category sm:w-[170px] sm:h-[40px] border-[1px] border-[#D4D4D4] rounded-[8px] flex sm:my-auto relative"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
-          <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
-          {showSubmenu && (
-            <div className="submenu absolute bg-white shadow-lg z-50 border-[#D4D4D4] h-[432px]  w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-[54px]">
-              {categories.length > 0 ? (
-                categories.map(category => (
-                  <div key={category.id} className="submenu-item p-2 hover:text-[#304ba0] hover:underline cursor-pointer">
-                    {category.name}
-                  </div>
-                ))
-              ) : (
-                <div className="submenu-item p-2">Loading...</div>
-              )}
-            </div>
-          )}
-        </div>
+      <div
+  className="category sm:w-[170px] sm:h-[40px] border-[1px] border-[#D4D4D4] rounded-[8px] flex sm:my-auto relative"
+  onClick={() => setShowSubmenu(!showSubmenu)}  // Toggle submenu visibility on click
+>
+  <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
+  <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
+  {showSubmenu && (
+    <div className="submenu absolute bg-white shadow-lg z-50 border-[#D4D4D4] h-[432px] w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-[54px]">
+      {categories.length > 0 ? (
+        categories.map(category => (
+          <div key={category.id} className="submenu-item p-2 hover:text-[#304ba0] hover:underline cursor-pointer">
+            {category.name}
+          </div>
+        ))
+      ) : (
+        <div className="submenu-item p-2">Loading...</div>
+      )}
+    </div>
+  )}
+</div>
+
 
         {categories && categories.map((category) => (
           <div
