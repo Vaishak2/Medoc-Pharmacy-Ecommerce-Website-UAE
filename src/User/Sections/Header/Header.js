@@ -164,13 +164,13 @@ function Header() {
                     <Link to="/about">Hello User...!</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
-                    <Link to="myaccount">My orders</Link>
+                    <Link to="myaccount?section=1">My orders</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
-                    <Link to="myaccount">My wishlist</Link>
+                    <Link to="myaccount?section=2">My wishlist</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium border-b">
-                    <Link to="myaccount">Saved address</Link>
+                    <Link to="myaccount?section=3">Saved address</Link>
                   </li>
                   <li className="px-4 py-2 cursor-pointer hover:font-medium">
                     <Link to="/about">Need help !</Link>

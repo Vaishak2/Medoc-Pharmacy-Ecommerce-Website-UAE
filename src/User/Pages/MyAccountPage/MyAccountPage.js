@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './MyAccountPage.css'
 import Edit from '../../../Assets/Icons/Edit.png'
 import HeartIcon from '../../../Assets/Icons/heart.png'
@@ -9,14 +9,22 @@ import MyWishlist from '../../Components/MyAccountComponents/MyWishlist/MyWishli
 import SavedAddress from '../../Components/MyAccountComponents/SavedAddress/SavedAddress'
 import PDPProductPolicy from '../../Components/PDPProductPolicy/PDPProductPolicy'
 import EditProfile from '../../Components/MyAccountComponents/EditProfile/EditProfile'
+import { useSearchParams } from 'react-router-dom'
 
-function MyAccountPage() {
+function MyAccountPage() {  
 
-    const [toggleState, setToggleState] = useState(1);
+    const [searchParams] = useSearchParams();
+
+    const [toggleState, setToggleState] = useState(Number(searchParams.get('section')));
+    
 
     const toggleTab = (index) => {
         setToggleState(index)
     }
+
+    useEffect(()=>{
+        setToggleState(Number(searchParams.get('section')))
+    },[searchParams])
 
     return (
         <div className='bg-[#FAFAFA]  pb-[73px]'>
