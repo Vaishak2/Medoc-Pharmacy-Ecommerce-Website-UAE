@@ -9,6 +9,7 @@ import EmptyMyOrders from './EmptyMyOrders';
 import RateAndReview from './RateAndReview';
 import OrderDetails from './OrderDetails';
 import MyOrderCompleted from './MyOrderCompletede';
+import MyOrderReason from './MyOrderReason';
 
 function MyOrders() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -124,7 +125,8 @@ function MyOrders() {
         // <div><EmptyMyOrders/></div>
         // <div> <RateAndReview/> </div>
         // <div><OrderDetails/></div>
-        <div><MyOrderCompleted/></div>
+        // <div><MyOrderCompleted/></div>
+        <div><MyOrderReason/></div>
 
     );
 }
