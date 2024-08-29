@@ -15,7 +15,7 @@ function CategoryThisWeekPage() {
 
     const {cart,setCart} = useContext(userContext)
 
-    const userId = localStorage.getItem("userId")
+    const userId = 1;
 
     const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
 
@@ -54,7 +54,7 @@ function CategoryThisWeekPage() {
         console.log(response.data.data.productsList[0],'weeeeeekk')
         setThisWeekPicks(response.data.data.productsList[0])
       })
-    },[thisWeekPicks])
+    },[])
 
     
   return (

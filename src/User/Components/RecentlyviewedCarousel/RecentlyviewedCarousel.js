@@ -68,7 +68,7 @@ function RecentlyviewedCarousel() {
 
     const { cart, setCart } = useContext(userContext)
 
-    const userId = localStorage.getItem("userId")
+    const userId = 1;
 
     const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
 
@@ -109,9 +109,10 @@ function RecentlyviewedCarousel() {
     useEffect(() => {
         Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
             .then(response => {
+                console.log(response.data.data.products,'recenttttttttttttt')
                 setRecentlyviewedProducts(response.data.data.products)
             })
-    }, [recentlyviewedProducts])
+    }, [])
 
     return (
         <div className=' w-[1200px] mx-auto pt-[64px]'>

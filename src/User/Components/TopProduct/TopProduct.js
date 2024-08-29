@@ -52,12 +52,12 @@ function TopProduct() {
   const pageSize = '8'
 
   useEffect(() => {
-    Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    Api.get('deals')
       .then(response => {
-        console.log(response.data.data.products, 'topproductsdaaaaata')
-        setTopProducts(response.data.data.products)
+        console.log(response.data.data.productsList, 'topproductsdaaaaata')
+        setTopProducts(response.data.data.productsList)
       })
-  }, [topProducts])
+  }, [])
 
   return (
     <div>
@@ -77,11 +77,11 @@ function TopProduct() {
                   alt=""
                   onClick={() => toggleFavorite(index)}
                 />
-                <img className='sm:w-[103] sm:h-[132px] mx-auto ' src={product.image_url} alt="" />
+                <img className='sm:w-[103] sm:h-[132px] mx-auto ' src={product.product.image_url} alt="" />
                 <div className='sm:w-[69px] sm:h-[28px] border bg-[#ffff] rounded-[4px] flex ml-[10px] mt-[4px]  '>
                   <div className=' flex text-center ml-[12px] '>
                     <img className='sm:w-[16px] sm:h-[16px] mt-[6px] ' src={Star} alt="" />
-                    <div className='sm:w-[23px] sm:h-[16px] text-[16px] translate-y-[2px] ml-[6px] '>{product.rating}</div>
+                    <div className='sm:w-[23px] sm:h-[16px] text-[16px] translate-y-[2px] ml-[6px] '>{product.product.rating}</div>
 
                   </div>
 
@@ -89,19 +89,19 @@ function TopProduct() {
 
               </div>
               <div className='sm:text-start sm:text-[16px] sm:leading-[24px] font-normal sm:mt-[16px] mb-[16px] '>
-                {product.name}
+                {product.product.name}
               </div>
               <div className='sm:w-[281px] sm:h-[128] '>
                 <div className='flex sm:text-start sm:text-[16px] sm:leading-[28px] '>
-                  <h1 className='line-through text-[#A8A8A8]'>{product.price}</h1>
-                  <h1 className='ml-[8px] text-[#0FB015]'>30% OFF </h1>
+                  <h1 className='line-through text-[#A8A8A8]'>{product.product.beforePrice}</h1>
+                  <h1 className='ml-[8px] text-[#0FB015]'>{product.product.offer}% OFF </h1>
                 </div>
-                <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.price} </h1>
+                <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.product.price} </h1>
 
                 <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
                   <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
-                  {product.isCart ? <div className='text-white ml-[42px] mt-[-23px]' onClick={()=>removeFromCart(product.id)}>Remove</div> :
-                    <div className='text-white ml-[42px] mt-[-23px] ' onClick={()=>addToCart(product.id)}>Add To Cart</div>
+                  {product.product.isCart ? <div className='text-white ml-[42px] mt-[-23px]' onClick={()=>removeFromCart(product.product.id)}>Remove</div> :
+                    <div className='text-white ml-[42px] mt-[-23px] ' onClick={()=>addToCart(product.product.id)}>Add To Cart</div>
                   }
                 </div>
 
