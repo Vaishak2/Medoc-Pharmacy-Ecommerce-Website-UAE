@@ -54,7 +54,7 @@ function CategoryThisWeekPage() {
         console.log(response.data.data.productsList[0],'weeeeeekk')
         setThisWeekPicks(response.data.data.productsList[0])
       })
-    },[thisWeekPicks])
+    },[])
 
     
   return (
