@@ -131,7 +131,7 @@ function MyOrders() {
         // <div><OrderDetails/></div>
         // <div><MyOrderCompleted/></div>
 
-        <div><OrderCancelRequest/></div>
+        // <div><OrderCancelRequest/></div>
 
         <div><MyOrderReturnReason/></div>
 
