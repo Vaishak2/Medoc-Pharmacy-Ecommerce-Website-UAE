@@ -68,7 +68,7 @@ function RecentlyviewedCarousel() {
 
     const { cart, setCart } = useContext(userContext)
 
-    const userId = localStorage.getItem("userId")
+    const userId = 1;
 
     const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
 
