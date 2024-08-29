@@ -1,16 +1,19 @@
-import React, { createContext } from 'react'
+import React, { createContext, useState } from 'react'
 import Header from './Sections/Header/Header'
 import Footer from './Sections/Footer/Footer'
 import { Outlet } from 'react-router-dom'
 
-export const contextData = createContext()
+export const userContext = createContext()
 
 function UserLayout() {
+  const [cart,setCart] = useState([])
   return (
     <div>
-      <Header/>
-      <Outlet/>
-      <Footer/>
+      <userContext.Provider value={{cart,setCart}}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </userContext.Provider>
     </div>
   )
 }
