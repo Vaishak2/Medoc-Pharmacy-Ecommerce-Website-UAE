@@ -57,7 +57,7 @@ function TopProduct() {
         console.log(response.data.data.products, 'topproductsdaaaaata')
         setTopProducts(response.data.data.products)
       })
-  }, [topProducts])
+  }, [])
 
   return (
     <div>
