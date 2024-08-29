@@ -43,7 +43,7 @@ function MyOrderReturnReason() {
               type="radio"
               name="reason"
               value="defective"
-              className="form-radio h-4 w-4 text-[#304BA0]"
+              className="form-radio-[] h-4 w-4 text-[#304BA0]"
             />
             <span className="ml-2 text-[#000000]">Received defective product.</span>
           </label>
@@ -72,7 +72,7 @@ function MyOrderReturnReason() {
           </label>
           <textarea
             id="comment"
-            className="sm:w-[396px] sm:h-[144px] p-1 border border-[#B3B3B3] rounded-md sm:mt-2 resize-none placeholder:sm:text-base"
+            className="sm:w-[396px] sm:h-[144px] p-4 focus:outline-[#304BA0] border border-[#B3B3B3] rounded-lg sm:mt-2 resize-none placeholder:sm:text-base"
             placeholder="Type if you have any specific reason"
             maxLength={256}
           ></textarea>

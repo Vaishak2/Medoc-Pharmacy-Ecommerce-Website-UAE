@@ -13,6 +13,7 @@ import MyOrderCompleted from './MyOrderCompletede';
 import OrderCancelRequest from './OrderCancelRequest';
 
 import MyOrderReturnReason from './MyOrderReturnReason';
+import OrderRefundConfirmed from './OrderRefundConfirmed';
 
 
 function MyOrders() {
@@ -128,12 +129,13 @@ function MyOrders() {
 
         // <div><EmptyMyOrders/></div>
         // <div> <RateAndReview/> </div>
-        // <div><OrderDetails/></div>
+        <div><OrderDetails/></div>
         // <div><MyOrderCompleted/></div>
 
         // <div><OrderCancelRequest/></div>
 
-        <div><MyOrderReturnReason/></div>
+        // <div><MyOrderReturnReason/></div>
+        // <div><OrderRefundConfirmed/></div>
 
 
     );
