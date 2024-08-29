@@ -9,7 +9,11 @@ import EmptyMyOrders from './EmptyMyOrders';
 import RateAndReview from './RateAndReview';
 import OrderDetails from './OrderDetails';
 import MyOrderCompleted from './MyOrderCompletede';
+
+import OrderCancelRequest from './OrderCancelRequest';
+
 import MyOrderReturnReason from './MyOrderReturnReason';
+
 
 function MyOrders() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -126,7 +130,11 @@ function MyOrders() {
         // <div> <RateAndReview/> </div>
         // <div><OrderDetails/></div>
         // <div><MyOrderCompleted/></div>
+
+        <div><OrderCancelRequest/></div>
+
         <div><MyOrderReturnReason/></div>
+
 
     );
 }
