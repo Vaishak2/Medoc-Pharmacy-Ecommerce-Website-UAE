@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +12,7 @@ import ViewArrow from "../../../Assets/Icons/Group 515.png";
 import ProductImage from "../../../Assets/Top Product image/pngwing.com (14) 1.png";
 import './RecentlyviewedCarousel.css'
 import Api from '../../../Services/Api';
+import { userContext } from '../../UserLayout';
 
 
 const NextArrow = (props) => {
@@ -65,7 +66,34 @@ function RecentlyviewedCarousel() {
 
     const [recentlyviewedProducts, setRecentlyviewedProducts] = useState([])
 
+    const { cart, setCart } = useContext(userContext)
+
+    const userId = localStorage.getItem("userId")
+
     const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
+
+
+    const addToCart = (productId) => {
+        Api.post('cart/add', {
+            "userId": userId,
+            "productId": productId,
+            "quantity": 1,
+            "size": "300"
+        })
+            .then(response => {
+                console.log(response.data.message, 'recently addedd to cart')
+            })
+    }
+
+    const removeFromCart = (productId) => {
+        Api.post('cart/remove', {
+            "userId": userId,
+            "productId": productId
+        })
+            .then(response => {
+                console.log(response.data.message)
+            })
+    }
 
     const toggleFavorite = (index) => {
         const newFavorite = [...favorite];
@@ -74,93 +102,16 @@ function RecentlyviewedCarousel() {
     };
 
 
-    const productList = [
-        {
-            "id": 1,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 2,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 3,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 4,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 1,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 2,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 3,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
-        {
-            "id": 4,
-            "name": "Multivitamin Vitality Vitamin Healthkart Veg 2m Tablet",
-            "image": ProductImage,
-            "rating": "3.5",
-            "price": "AED 600",
-            "discount": "30% OFF",
-            "offerPrice": "AED 405"
-        },
 
-    ]
-
-    const userId = '1';
     const pageNumber = '1'
     const pageSize = '10'
 
     useEffect(() => {
         Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
-        .then(response => {
-            console.log(response.data.data.products,'rrrrrrrr')
-            setRecentlyviewedProducts(response.data.data.products)
-        })
-    },[])
+            .then(response => {
+                setRecentlyviewedProducts(response.data.data.products)
+            })
+    }, [recentlyviewedProducts])
 
     return (
         <div className=' w-[1200px] mx-auto pt-[64px]'>
@@ -201,9 +152,10 @@ function RecentlyviewedCarousel() {
                                 <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.price} </h1>
                                 <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
 
-                                    <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
-                                    <div className='text-white ml-[42px] mt-[-23px]  '>Add To Cart</div>
-
+                                    <img className='sm:w-[24px] sm:h-[24px]  ml-[83px] ' src={Cart} alt="" />
+                                    {product.isCart ? <div className='text-white ml-[42px] mt-[-23px]' onClick={() => removeFromCart(product.id)}>Remove</div> :
+                                        <div className='text-white ml-[42px] mt-[-23px]' onClick={() => addToCart(product.id)}>Add To Cart</div>
+                                    }
                                 </div>
 
                             </div>

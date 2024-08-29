@@ -1,16 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FavLogo from "../../../Assets/Icons/heart-svgrepo-com 1.svg";
-import FavLogoFilled from "../../../Assets/Icons/heart-svgrepo.svg"; 
+import FavLogoFilled from "../../../Assets/Icons/heart-svgrepo.svg";
 import ProductImage from "../../../Assets/Top Product image/pngwing.com (14) 1.png";
 import Star from "../../../Assets/Icons/star.png";
 import Cart from "../../../Assets/Icons/shopping_cart_svg.svg";
 import ViewArrow from "../../../Assets/Icons/Group 515.png";
 import Api from '../../../Services/Api';
+import { userContext } from '../../UserLayout';
 function TopProduct() {
 
   const [topProducts, setTopProducts] = useState([])
 
+  const { cart, setCart } = useContext(userContext)
+
+  const userId = 1;
+
   const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
+
+  const addToCart = (productId) => {
+    Api.post('cart/add', {
+      "userId": 1,
+      "productId": productId,
+      "quantity": 1,
+      "size": "300"
+    })
+      .then(response => {
+        console.log(response.data.message)
+      })
+  }
+
+  const removeFromCart = (productId) => {
+    Api.post('cart/remove', {
+      "userId": 1,
+      "productId": productId
+    })
+    .then(response => {
+      console.log(response.data.message)
+    })
+  }
 
   const toggleFavorite = (index) => {
     const newFavorite = [...favorite];
@@ -18,19 +45,19 @@ function TopProduct() {
     setFavorite(newFavorite);
   };
 
-  
 
-  const userId = '1';
+
+  
   const pageNumber = '1'
   const pageSize = '8'
 
   useEffect(() => {
     Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
-    .then(response => {
-      console.log(response.data.data.products,'topproductsdata')
-      setTopProducts(response.data.data.products)
-    })
-  },[])
+      .then(response => {
+        console.log(response.data.data.products, 'topproductsdaaaaata')
+        setTopProducts(response.data.data.products)
+      })
+  }, [topProducts])
 
   return (
     <div>
@@ -44,7 +71,7 @@ function TopProduct() {
 
             <div className='sm:w-[282px] sm:h-[421px] mr-[24px] mt-[24px] '>
               <div className='sm:w-[282px] sm:h-[213px] bg-[#ececec] rounded-[8px] pt-[11px] '>
-              <img
+                <img
                   className='ml-[242px] cursor-pointer  '
                   src={favorite[index] ? FavLogoFilled : FavLogo}
                   alt=""
@@ -73,7 +100,9 @@ function TopProduct() {
 
                 <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
                   <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
-                  <div className='text-white ml-[42px] mt-[-23px]  '>Add To Cart</div>
+                  {product.isCart ? <div className='text-white ml-[42px] mt-[-23px]' onClick={()=>removeFromCart(product.id)}>Remove</div> :
+                    <div className='text-white ml-[42px] mt-[-23px] ' onClick={()=>addToCart(product.id)}>Add To Cart</div>
+                  }
                 </div>
 
               </div>
@@ -81,9 +110,9 @@ function TopProduct() {
             </div>
           ))
           }
-          
-       
-          
+
+
+
         </div>
 
       </div>

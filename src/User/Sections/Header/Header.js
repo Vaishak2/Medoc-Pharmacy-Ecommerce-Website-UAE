@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import axios from 'axios';
 import Logo from "../../../Assets/Logos/MedopharmaLogo.png";
 import SearchIcon from "../../../Assets/Icons/search.png";
@@ -20,18 +20,15 @@ function Header() {
   const [subSubcategories, setSubSubcategories] = useState([]);
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false)
-
+  const [isAccountDropdownOpen,setIsAccountDropdownOpen]= useState(false)
+  
 
 
   const userToken = localStorage.getItem("userToken")
 
   const dropdownRef = useRef(null)
-  const AllCategoryRef = useRef(null)
-  const LanguageRef = useRef(null)
-  useEffect(() => {
 
-    //API Calling
+  useEffect(() => {
     axios.get('http://194.238.23.134:3000/api/categories')
       .then(response => {
         setCategories(response.data.data);
@@ -40,30 +37,23 @@ function Header() {
       .catch(error => {
         console.log("NOT WORKING");
       });
-
+  }, []);
+  useEffect(() => {
     // Function to handle clicks outside the dropdown
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsAccountDropdownOpen(false);
       }
-      else if (AllCategoryRef.current && !AllCategoryRef.current.contains(event.target)) {
-        setShowSubmenu(false);
-      }
-      else if(LanguageRef.current && !LanguageRef.current.contains(event.target)){
-        setLanguage("")
-      }
-      
     };
 
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
 
-
     return () => {
       // Unbind the event listener on cleanup
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef][AllCategoryRef]);
+  }, [dropdownRef]);
 
   const handleMouseEnter = () => {
     setShowSubmenu(true);
@@ -71,7 +61,7 @@ function Header() {
 
   const handleMouseLeave = () => {
     const timeout = setTimeout(() => {
-
+      setShowSubmenu(false);
       setActiveCategory(null);
       setActiveSubcategory(null);
       setSubSubcategories([]);
@@ -108,21 +98,22 @@ function Header() {
     // Add your logout logic here
     console.log("User logged out");
     localStorage.removeItem("userToken")
+    localStorage.removeItem("userId")
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
-  const toggleAccountDropdown = () => {
-    setIsAccountDropdownOpen(!isAccountDropdownOpen)
-  }
+ const toggleAccountDropdown =()=>{
+  setIsAccountDropdownOpen(!isAccountDropdownOpen)
+ } 
   return (
     <div className='main-container  mx-auto sticky top-0 z-50 bg-white'>
       <div className='mx-auto'>
         <div className='logo-section sm:h-[71px] mt-[16px] sm:mx-[120px] justify-between gap-1 sm:flex'>
           <div>
             <div className='logo'>
-              <Link to={"/"}> <img className='sm:w-[86px] sm:h-[71px] cursor-pointer' src={Logo} alt="Logo" /></Link>
+             <Link to ={"/"}> <img className='sm:w-[86px] sm:h-[71px] cursor-pointer' src={Logo} alt="Logo" /></Link>
             </div>
           </div>
           <div className='search-bar sm:w-[512px] sm:h-[56px] border border-opacity-5 border-[#EBEBEB] rounded-[15px] bg-[#F9F9F9] sm:mt-[8px] sm:ml-[32px] sm:flex'>
@@ -159,7 +150,7 @@ function Header() {
               <img onClick={handleDropdownToggle} className='sm:w-[16px] sm:h-[9px] sm:ml-[7px] sm:my-auto' src={DropDownArrow} alt="Arrow" />
             </div>
             <div className='cart-fav sm:flex justify-center gap-6 sm:ml-[24px]'>
-              <div><Link to={'myaccount?section=2'}><img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" /></Link></div>
+              <div><Link to={'myaccount'}><img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Fav} alt="Favorite" /></Link></div>
               <div><Link to={'cart'}><img className='sm:w-[24px] sm:h-[24px] sm:ml-[24px] mt-[24px] cursor-pointer' src={Cart} alt="Cart" /></Link></div>
             </div>
             <div className='login-section flex cursor-pointer ml-[24px] relative' onClick={toggleAccountDropdown}>
@@ -169,7 +160,7 @@ function Header() {
               }
               {isAccountDropdownOpen && (
                 <ul ref={dropdownRef} className="absolute right-0 mt-[89px] bg-white rounded-lg p-4 sm:w-[224px] sm:h-[276px] shadow-lg text-justify text-sm z-50">
-
+               
                   <li className="px-4 py-2 cursor-pointer sm:font-medium hover:font-medium border-b">
                     <Link to="/about">Hello User...!</Link>
                   </li>
@@ -189,7 +180,7 @@ function Header() {
                     <Link to="/about">About</Link>
                   </li>
                   {userToken ?
-                    <li className="px-4 py-2 cursor-pointer hover:font-medium" onClick={handleLoginClick}>Logout</li> : null
+                  <li className="px-4 py-2 cursor-pointer hover:font-medium" onClick={handleLoginClick}>Logout</li> : null
                   }
                 </ul>
               )}
@@ -198,29 +189,28 @@ function Header() {
         </div>
       </div>
       <div className='flex  justify-center sm:h-[72px] sm:mt-[17px] border-t border-b border-#EAEAEA gap-1'>
-        {/* All Category Section */}
-        <div
-          className="category sm:w-[170px] sm:h-[40px] border-[1px] border-[#D4D4D4] rounded-[8px] flex sm:my-auto cursor-pointer relative"
-          onClick={() => setShowSubmenu(!showSubmenu)}  // Toggle submenu visibility on click
-        >
-          <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
-          <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
-          {showSubmenu && (
-            <div ref={AllCategoryRef} className="submenu absolute bg-white shadow-lg z-50 border-[#D4D4D4] h-[432px] w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-[54px]">
-              {categories.length > 0 ? (
-                categories.map(category => (
-                  <div key={category.id} className="submenu-item p-2 hover:text-[#304ba0] hover:underline cursor-pointer">
-                    {category.name}
-                  </div>
-                ))
-              ) : (
-                <div className="submenu-item p-2">Loading...</div>
-              )}
-            </div>
-          )}
-        </div>
+      <div
+  className="category sm:w-[170px] sm:h-[40px] border-[1px] border-[#D4D4D4] rounded-[8px] flex sm:my-auto relative"
+  onClick={() => setShowSubmenu(!showSubmenu)}  // Toggle submenu visibility on click
+>
+  <img className='sm:w-[17px] sm:h-[11px] sm:ml-[16px] sm:my-auto justify-center content-center' src={Menu} alt="Menu" />
+  <div className='sm:my-auto sm:ml-[16px] sm:text-[14px] sm:leading-[18px] text-center font-normal'>All Categories</div>
+  {showSubmenu && (
+    <div className="submenu absolute bg-white shadow-lg z-50 border-[#D4D4D4] h-[432px] w-[254px] text-start pt-6 pl-10 pb-[37px] text-[14px] mb-4 leading-4 font-normal sm:mt-[54px]">
+      {categories.length > 0 ? (
+        categories.map(category => (
+          <div key={category.id} className="submenu-item p-2 hover:text-[#304ba0] hover:underline cursor-pointer">
+            {category.name}
+          </div>
+        ))
+      ) : (
+        <div className="submenu-item p-2">Loading...</div>
+      )}
+    </div>
+  )}
+</div>
 
-        {/* Category showing in nav bar */}
+
         {categories && categories.map((category) => (
           <div
             key={category.id}

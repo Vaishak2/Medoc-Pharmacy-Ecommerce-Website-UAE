@@ -50,6 +50,7 @@ function LoginWithPhone() {
         console.log(response.data.token)
         setUserToken(response.data.token)
         localStorage.setItem("userToken",response.data.token)
+        localStorage.setItem("userId",response.data.user_id)
         navigate(-1)
       })
     }
