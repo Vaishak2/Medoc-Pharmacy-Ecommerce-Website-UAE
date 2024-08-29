@@ -51,13 +51,13 @@ function TopProduct() {
   const pageNumber = '1'
   const pageSize = '8'
 
-  useEffect(() => {
-    Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
-      .then(response => {
-        console.log(response.data.data.products, 'topproductsdaaaaata')
-        setTopProducts(response.data.data.products)
-      })
-  }, [topProducts])
+  // useEffect(() => {
+  //   Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  //     .then(response => {
+  //       console.log(response.data.data.products, 'topproductsdaaaaata')
+  //       setTopProducts(response.data.data.products)
+  //     })
+  // }, [topProducts])
 
   return (
     <div>
