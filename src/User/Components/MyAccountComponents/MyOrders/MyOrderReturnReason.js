@@ -37,7 +37,7 @@ function MyOrderReturnReason() {
         <p className="text-[#818180] sm:text-[12px] sm:leading-[18px] sm:mt-2 ">
           We kindly request you to provide the reason for the return, <br /> as it will be utilized to enhance our service.
         </p>
-        <div className="sm:mt-6">
+        <div className="sm:mt-6 sm:text-[14px] sm:leading-[22px]">
           <label className="flex items-center ">
             <input
               type="radio"
@@ -67,18 +67,18 @@ function MyOrderReturnReason() {
           </label>
         </div>
         <div className=" sm:mt-6">
-          <label htmlFor="comment" className="block text-[#030300]">
+          <label htmlFor="comment" className="block sm:text-sm text-[#030300]">
             Comment
           </label>
           <textarea
             id="comment"
-            className="sm:w-[396px] sm:h-[144px] p-1 border border-[#B3B3B3] rounded-md sm:mt-2 resize-none"
+            className="sm:w-[396px] sm:h-[144px] p-1 border border-[#B3B3B3] rounded-md sm:mt-2 resize-none placeholder:sm:text-base"
             placeholder="Type if you have any specific reason"
             maxLength={256}
           ></textarea>
           <p className="text-[#818180] sm:text-[12px] sm:mt-2">256 character limit.</p>
         </div>
-        <button className="sm:w-[396px] sm:mt-8 bg-[#304BA0] text-white py-[19px] rounded-lg  hover:bg-[#3e5fc5] transition">
+        <button className="sm:w-[396px] sm:mt-8 bg-[#304BA0] text-white py-[19px] rounded-lg sm:text-base hover:bg-[#3e5fc5] transition">
           Confirm Return
         </button>
       </div>
