@@ -51,8 +51,8 @@ function CategoryThisWeekPage() {
     useEffect(() => {
       Api.get('deals')
       .then(response => {
-        console.log(response.data.data.productsList[0],'weeeeeekk')
-        setThisWeekPicks(response.data.data.productsList[0])
+        console.log(response.data.data.productsList,'weeeeeekk')
+        setThisWeekPicks(response.data.data.productsList)
       })
     },[])
 

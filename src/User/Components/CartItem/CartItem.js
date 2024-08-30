@@ -144,6 +144,8 @@ function CartItem() {
   }, [])
 
   return (
+    <div>
+    {cart.length===0 ? <CartEmpty/> :
     <div className={`cart-section flex mx-auto w-fit gap-6 ${isCartChooseOpen || isRemoveModalOpen ? 'blur-background' : ''}`}>
       <div className="cart-first-section sm:mt-16">
         <h1 className="sm:text-[18px] sm:leading-6 font-semibold text-start">
@@ -287,7 +289,8 @@ function CartItem() {
         </div>
       )}
     </div>
-
+    }
+    </div>
   );
 }
 
