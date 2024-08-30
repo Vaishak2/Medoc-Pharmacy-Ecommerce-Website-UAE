@@ -17,6 +17,14 @@ function TopProduct() {
 
   const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
 
+  const getTopProducts =()=> {
+    Api.get('deals')
+    .then(response => {
+      console.log(response.data.data.productsList, 'topproductsdaaaaata')
+      setTopProducts(response.data.data.productsList)
+    })
+  }
+
   const addToCart = (productId) => {
     Api.post('cart/add', {
       "userId": 1,
@@ -26,7 +34,10 @@ function TopProduct() {
     })
       .then(response => {
         console.log(response.data.message)
+        getTopProducts();
       })
+      
+      
   }
 
   const removeFromCart = (productId) => {
@@ -36,6 +47,7 @@ function TopProduct() {
     })
     .then(response => {
       console.log(response.data.message)
+      getTopProducts();
     })
   }
 
@@ -52,11 +64,7 @@ function TopProduct() {
   const pageSize = '8'
 
   useEffect(() => {
-    Api.get('deals')
-      .then(response => {
-        console.log(response.data.data.productsList, 'topproductsdaaaaata')
-        setTopProducts(response.data.data.productsList)
-      })
+    getTopProducts();
   }, [])
 
   return (
