@@ -4,6 +4,7 @@ import PlayStore from "../../../Assets/Footer images/Play store icon.png"
 import Facebook from "../../../Assets/Footer images/Group 585.png"
 import Instagram from "../../../Assets/Footer images/Group 586.png"
 import Twitter from "../../../Assets/Footer images/Group 587.png"
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -13,7 +14,7 @@ function Footer() {
           <div className=''>
             <div className='sm:text-[18px] sm:font-medium sm:leading-[20px] sm:mb-[16px] '>Explore</div>
             <div className='sm:text-[16px] sm:leading-[32px] sm:text-[#545454] '><ul>
-              <li className='cursor-pointer'>Home</li>
+              <li className='cursor-pointer'><Link to="/">Home</Link></li>
               <li className='cursor-pointer'>Blog Page</li>
               <li className='cursor-pointer'>About us</li>
               <li className='cursor-pointer'>Our Policies</li>
