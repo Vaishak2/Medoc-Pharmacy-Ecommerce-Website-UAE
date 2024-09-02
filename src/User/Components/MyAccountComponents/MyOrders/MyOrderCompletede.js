@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import prodctImg from "../../../../Assets/Top Product image/pngwing.com (14) 1.png"
 import PackageDeliverd from "../../../../Assets/Icons/package delivered.svg"
 import Star from "../../../../Assets/Icons/star.png"
 import DownArrow from "../../../../Assets/Icons/chevron_forward.svg"
+import upArrow from "../../../../Assets/Icons/upArrow.svg";
 
 const MyOrderCompleted = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
     return (
         <div className="flex  bg-gray-100 text-justify">
             {/* Main Content */}
@@ -38,14 +44,16 @@ const MyOrderCompleted = () => {
                     </div>
                     {/* under line border */}
                     <div className='border sm:mt-10'></div>
-                    <div>
-                        <div className='flex sm:mt-10 justify-between'>
-
-                            <p className='sm:text-[14px] sm:leading-6 sm:font-medium sm:ml-2'>View shipment history</p>
-                            <img className='sm:w-6 sm:h-6 sm:' src={DownArrow} alt="" />
-
-                        </div>
-                    </div>
+                    <div className='flex sm:mt-10 justify-between cursor-pointer' onClick={toggleDropdown}>
+                <p className='sm:text-[14px] sm:leading-6 sm:font-medium sm:ml-2'>View shipment history</p>
+                <img className='sm:w-6 sm:h-6' src={isOpen ? upArrow : DownArrow} alt="Toggle dropdown" />
+            </div>
+            <div
+                className={`sm:ml-2 mt-2 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+            >
+                {/* Dropdown content goes here */}
+                <p className=''>dropdown contents here</p>
+            </div>
                     {/* under line border */}
                     <div className='border sm:mt-10'></div>
 
