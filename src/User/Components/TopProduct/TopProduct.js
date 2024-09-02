@@ -4,12 +4,17 @@ import FavLogoFilled from "../../../Assets/Icons/heart-svgrepo.svg";
 import ProductImage from "../../../Assets/Top Product image/pngwing.com (14) 1.png";
 import Star from "../../../Assets/Icons/star.png";
 import Cart from "../../../Assets/Icons/shopping_cart_svg.svg";
+import Carted from "../../../Assets/Icons/cart_check_circle.svg";
 import ViewArrow from "../../../Assets/Icons/Group 515.png";
 import Api from '../../../Services/Api';
 import { userContext } from '../../UserLayout';
+import { PulseLoader } from 'react-spinners';
+
+
 function TopProduct() {
 
   const [topProducts, setTopProducts] = useState([])
+  const [buttonLoadingId, setButtonLoadingId] = useState(null)
 
   const { cart, setCart } = useContext(userContext)
 
@@ -17,38 +22,54 @@ function TopProduct() {
 
   const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
 
-  const getTopProducts =()=> {
-    Api.get('deals')
-    .then(response => {
+  const getTopProducts = async () => {
+    try {
+      const response = await Api.get('deals');
       console.log(response.data.data.productsList, 'topproductsdaaaaata')
       setTopProducts(response.data.data.productsList)
-    })
+    } catch (error) {
+      console.error('Error fetcting toop products', error);
+    }
   }
 
   const addToCart = (productId) => {
+    setButtonLoadingId(productId)
     Api.post('cart/add', {
       "userId": 1,
       "productId": productId,
       "quantity": 1,
       "size": "300"
     })
-      .then(response => {
+      .then(response => { 
         console.log(response.data.message)
-        getTopProducts();
+        return getTopProducts();
       })
-      
-      
+      .then(()=>{
+        setButtonLoadingId(null);
+      })
+      .catch(error => {
+        console.error(error);
+        setButtonLoadingId(null);
+      })
   }
 
   const removeFromCart = (productId) => {
+    setButtonLoadingId(productId)
     Api.post('cart/remove', {
       "userId": 1,
       "productId": productId
     })
-    .then(response => {
-      console.log(response.data.message)
-      getTopProducts();
-    })
+      .then(response => {
+        console.log(response.data.message)
+        return getTopProducts();
+      })
+      .then(()=>{
+        setButtonLoadingId(null)
+      })
+      .catch(error => {
+        console.error(error);
+        setButtonLoadingId(null);
+      })
   }
 
   const toggleFavorite = (index) => {
@@ -59,7 +80,7 @@ function TopProduct() {
 
 
 
-  
+
   const pageNumber = '1'
   const pageSize = '8'
 
@@ -106,10 +127,30 @@ function TopProduct() {
                 </div>
                 <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.product.price} </h1>
 
-                <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
-                  <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
-                  {product.product.isCart ? <div className='text-white ml-[42px] mt-[-23px]' onClick={()=>removeFromCart(product.product.id)}>Remove</div> :
-                    <div className='text-white ml-[42px] mt-[-23px] ' onClick={()=>addToCart(product.product.id)}>Add To Cart</div>
+                <div className='sm:w-[281px] sm:h-[48px] border border-[#304BA0] rounded-[8px] cursor-pointer flex items-center justify-center gap-2'>
+                  {buttonLoadingId === product.product.id ?
+                    <div>
+                      <PulseLoader
+                        color={'#304BA0'}
+                        loading={true}
+                        size={10}
+                        aria-label="Loading Spinner"
+                        data-testid="Loader"
+                      />
+                    </div> :
+                    <div>
+                      {product.product.isCart ?
+                        <div className='sm:w-[281px] sm:h-[48px] border border-[#304BA0] rounded-[8px] cursor-pointer flex items-center justify-center gap-2' onClick={() => removeFromCart(product.product.id)}>
+                          <div><img className='sm:w-[24px] sm:h-[24px] ' src={Carted} alt="" /></div>
+                          <div className='text-[#304BA0]'>Added to cart</div>
+                        </div>
+                        :
+                        <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer' onClick={() => addToCart(product.product.id)}>
+                          <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
+                          <div className='text-white ml-[42px] mt-[-23px] '>Add To Cart</div>
+                        </div>
+                      }
+                    </div>
                   }
                 </div>
 
