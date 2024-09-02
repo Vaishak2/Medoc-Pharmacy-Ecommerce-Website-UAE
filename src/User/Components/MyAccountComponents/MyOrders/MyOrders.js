@@ -14,6 +14,7 @@ import OrderCancelRequest from './OrderCancelRequest';
 
 import MyOrderReturnReason from './MyOrderReturnReason';
 import OrderRefundConfirmed from './OrderRefundConfirmed';
+import OrderCancelReason from './OrderCancelReason';
 
 
 function MyOrders() {
@@ -119,23 +120,22 @@ function MyOrders() {
         //     {/* Modal Rendering */}
         //     {isModalOpen && (
         //         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-                 
-                        
+
+
         //                 <ReviewForm  closeModal={closeModal}/>
-                 
+
         //         </div>
         //     )}
         // </div>
 
         // <div><EmptyMyOrders/></div>
         // <div> <RateAndReview/> </div>
-        <div><OrderDetails/></div>
+        // <div><OrderDetails/></div>
         // <div><MyOrderCompleted/></div>
-
-        // <div><OrderCancelRequest/></div>
-
+        // <div><OrderCancelReason/></div>
+        // <div><OrderCancelRequest /></div>
+        <div><OrderRefundConfirmed/></div>
         // <div><MyOrderReturnReason/></div>
-        // <div><OrderRefundConfirmed/></div>
 
 
     );
