@@ -8,6 +8,7 @@ import FavLogo from "../../../Assets/Icons/heart-svgrepo-com 1.svg";
 import FavLogoFilled from "../../../Assets/Icons/heart-svgrepo.svg";
 import Star from "../../../Assets/Icons/star.png";
 import Cart from "../../../Assets/Icons/shopping_cart_svg.svg";
+import Carted from "../../../Assets/Icons/cart_check_circle.svg";
 import ViewArrow from "../../../Assets/Icons/Group 515.png";
 import ProductImage from "../../../Assets/Top Product image/pngwing.com (14) 1.png";
 import './RecentlyviewedCarousel.css'
@@ -69,9 +70,18 @@ function RecentlyviewedCarousel() {
     const { cart, setCart } = useContext(userContext)
 
     const userId = 1;
+    const pageNumber = '1'
+    const pageSize = '10'
 
     const [favorite, setFavorite] = useState(Array(8).fill(false)); // Array to hold favorite status for each product
 
+    const getRecentlyViewedProducts =()=> {
+        Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
+        .then(response => {
+            console.log(response.data.data.products, 'recenttttttttttttt')
+            setRecentlyviewedProducts(response.data.data.products)
+        })
+    }
 
     const addToCart = (productId) => {
         Api.post('cart/add', {
@@ -82,6 +92,7 @@ function RecentlyviewedCarousel() {
         })
             .then(response => {
                 console.log(response.data.message, 'recently addedd to cart')
+                getRecentlyViewedProducts();
             })
     }
 
@@ -92,6 +103,7 @@ function RecentlyviewedCarousel() {
         })
             .then(response => {
                 console.log(response.data.message)
+                getRecentlyViewedProducts();
             })
     }
 
@@ -103,15 +115,10 @@ function RecentlyviewedCarousel() {
 
 
 
-    const pageNumber = '1'
-    const pageSize = '10'
+    
 
     useEffect(() => {
-        Api.get(`recentlyView/:searchKeyWord?userId=${userId}&pageNumber=${pageNumber}&pageSize=${pageSize}`)
-            .then(response => {
-                console.log(response.data.data.products,'recenttttttttttttt')
-                setRecentlyviewedProducts(response.data.data.products)
-            })
+        getRecentlyViewedProducts();
     }, [])
 
     return (
@@ -151,13 +158,19 @@ function RecentlyviewedCarousel() {
                                     <h1 className='ml-[8px] text-[#0FB015]'>{product.price} </h1>
                                 </div>
                                 <h1 className='sm:text-[18px] sm:leading-[28px] font-medium text-start mb-[16px]  '> {product.price} </h1>
-                                <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer '>
 
-                                    <img className='sm:w-[24px] sm:h-[24px]  ml-[83px] ' src={Cart} alt="" />
-                                    {product.isCart ? <div className='text-white ml-[42px] mt-[-23px]' onClick={() => removeFromCart(product.id)}>Remove</div> :
-                                        <div className='text-white ml-[42px] mt-[-23px]' onClick={() => addToCart(product.id)}>Add To Cart</div>
-                                    }
-                                </div>
+                                {product.isCart ?
+                                    <div className='sm:w-[281px] sm:h-[48px] border border-[#304BA0] rounded-[8px] cursor-pointer flex items-center justify-center gap-2' onClick={() => removeFromCart(product.id)}>
+                                        <div><img className='sm:w-[24px] sm:h-[24px] ' src={Carted} alt="" /></div>
+                                        <div className='text-[#304BA0]'>Added to cart</div>
+                                    </div>
+                                    :
+                                    <div className='sm:w-[281px] sm:h-[48px] bg-[#304BA0] rounded-[8px] pt-[12px] cursor-pointer' onClick={() => addToCart(product.id)}>
+                                        <img className='sm:w-[24px] sm:h-[24px]  ml-[83px]  ' src={Cart} alt="" />
+                                        <div className='text-white ml-[42px] mt-[-23px] '>Add To Cart</div>
+                                    </div>
+                                }
+
 
                             </div>
 
